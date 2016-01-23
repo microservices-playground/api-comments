@@ -6,6 +6,7 @@ services:
     class: AppBundle\Controller\Comments\ListController
     arguments:
       - "@comments.repository.comment"
+      - "@comments.transformer.entity_to_dto.comment"
   comments.controller.create:
     class: AppBundle\Controller\Comments\CreateController
   comments.controller.remove:
@@ -21,3 +22,6 @@ services:
     factory: ["@doctrine.orm.default_entity_manager", getRepository]
     arguments:
       - AppBundle\Entity\Mention
+
+  comments.transformer.entity_to_dto.comment:
+    class: AppBundle\Transformer\EntityToDto\CommentEntityToDtoTransformer
