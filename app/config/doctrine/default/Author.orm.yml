@@ -1,0 +1,18 @@
+AppBundle\Entity\Author:
+  type: entity
+  table: author
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    userId:
+      type: integer
+    username:
+      type: string
+      length: 255
+    avatarFilename:
+      type: string
+      length: 255

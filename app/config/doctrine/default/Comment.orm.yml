@@ -13,8 +13,6 @@ AppBundle\Entity\Comment:
   fields:
     postId:
       type: integer
-    userId:
-      type: integer
     content:
       type: text
     createdAt:
@@ -24,6 +22,14 @@ AppBundle\Entity\Comment:
           on: create
     active:
       type: boolean
+  manyToOne:
+    author:
+      targetEntity: AppBundle\Entity\Author
+      fetch: EAGER
+      joinColumn:
+        name: author_id
+        referencedColumnName: user_id
+        nullable: false
   oneToMany:
     mentions:
       targetEntity: AppBundle\Entity\Mention

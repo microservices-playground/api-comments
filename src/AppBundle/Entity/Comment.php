@@ -18,11 +18,6 @@ class Comment implements \JsonSerializable
     private $postId;
 
     /**
-     * @var int
-     */
-    private $userId;
-
-    /**
      * @var string
      */
     private $content;
@@ -36,6 +31,11 @@ class Comment implements \JsonSerializable
      * @var bool
      */
     private $active;
+
+    /**
+     * @var Author
+     */
+    private $author;
 
     /**
      * @var ArrayCollection
@@ -69,18 +69,6 @@ class Comment implements \JsonSerializable
     public function getPostId(): int
     {
         return $this->postId;
-    }
-
-    public function setUserId(int $userId): Comment
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    public function getUserId(): int
-    {
-        return $this->userId;
     }
 
     public function setContent(string $content): Comment
@@ -119,6 +107,18 @@ class Comment implements \JsonSerializable
         return $this->active;
     }
 
+    public function setAuthor(Author $author): Comment
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getAuthor(): Author
+    {
+        return $this->author;
+    }
+
     public function addMention(Mention $mention): Comment
     {
         $this->mentions[] = $mention;
@@ -139,8 +139,8 @@ class Comment implements \JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $mentions = $this->getMentions()->map(function (Comment $comment) {
-            return $comment->getContent() . 'popraw mnie bo tu ma byc username';
+        $mentions = $this->getMentions()->map(function (Mention $mention) {
+            return $mention->getUserId() . 'popraw mnie bo tu ma byc username';
         });
 
         return [
@@ -148,7 +148,7 @@ class Comment implements \JsonSerializable
             'post_id'    => $this->getPostId(),
             'created_at' => $this->getCreatedAt()->format(\DateTime::W3C),
             'content'    => $this->getContent(),
-            'user_id'    => $this->getUserId(),
+            'user_id'    => $this->getAuthor()->getUserId(),
             'username'   => 'popraw mnie',
             'mentions'   => $mentions->toArray(),
             'avatar'     => '/uploads/avatars/20a0df7e56e1b00eb531a79c7eaf30a46cafc257.jpg',

@@ -11,7 +11,7 @@ AppBundle\Entity\Mention:
       generator:
         strategy: AUTO
   fields:
-    userId:
+    author:
       type: integer
   manyToOne:
     comment:

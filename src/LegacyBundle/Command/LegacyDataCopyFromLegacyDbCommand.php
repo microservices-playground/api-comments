@@ -36,7 +36,7 @@ class LegacyDataCopyFromLegacyDbCommand extends ContainerAwareCommand
             $comment = new Comment();
             $comment->setId($legacyComment->getId());
             $comment->setPostId($legacyComment->getPostId());
-            $comment->setUserId($legacyComment->getUserId());
+            $comment->setAuthor($legacyComment->getUserId());
             $comment->setContent($legacyComment->getContent());
             $comment->setCreatedAt($legacyComment->getCreatedAt());
             $comment->setActive($legacyComment->getActive());

@@ -15,7 +15,7 @@ LegacyBundle\Entity\Comment:
   fields:
     postId:
       type: integer
-    userId:
+    author:
       type: integer
     content:
       type: text
