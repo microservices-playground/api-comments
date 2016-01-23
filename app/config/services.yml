@@ -4,7 +4,20 @@ parameters:
 services:
   comments.controller.list:
     class: AppBundle\Controller\Comments\ListController
+    arguments:
+      - "@comments.repository.comment"
   comments.controller.create:
     class: AppBundle\Controller\Comments\CreateController
   comments.controller.remove:
     class: AppBundle\Controller\Comments\RemoveController
+
+  comments.repository.comment:
+    class: AppBundle\Repository\CommentRepository
+    factory: ["@doctrine.orm.default_entity_manager", getRepository]
+    arguments:
+      - AppBundle\Entity\Comment
+  comments.repository.mention:
+    class: AppBundle\Repository\MentionRepository
+    factory: ["@doctrine.orm.default_entity_manager", getRepository]
+    arguments:
+      - AppBundle\Entity\Mention

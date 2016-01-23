@@ -1,7 +1,7 @@
 AppBundle\Entity\Mention:
   type: entity
   table: mention
-  repositoryClass: AppBundle\Repository\MentionRepository
+  repositoryClass: AppBundle\Repository\Doctrine\DoctrineMentionRepository
   uniqueConstraints:
     - columns: [comment_id, user_id]
   id:

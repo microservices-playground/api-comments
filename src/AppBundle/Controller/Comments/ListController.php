@@ -2,13 +2,25 @@
 
 namespace AppBundle\Controller\Comments;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Repository\CommentRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ListController
 {
-    public function listAction(Request $request, int $postId): Response
+    /**
+     * @var CommentRepository
+     */
+    private $commentRepository;
+
+    public function __construct(CommentRepository $commentRepository)
     {
-        return new Response('list_comments ' . $postId);
+        $this->commentRepository = $commentRepository;
+    }
+
+    public function listAction(int $postId): JsonResponse
+    {
+        $comments = $this->commentRepository->getCommentsByPostId($postId);
+
+        return new JsonResponse($comments);
     }
 }

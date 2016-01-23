@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Comment
+class Comment implements \JsonSerializable
 {
     /**
      * @var int
@@ -135,5 +135,24 @@ class Comment
     public function getMentions(): Collection
     {
         return $this->mentions;
+    }
+
+    public function jsonSerialize(): array
+    {
+        $mentions = $this->getMentions()->map(function (Comment $comment) {
+            return $comment->getContent() . 'popraw mnie bo tu ma byc username';
+        });
+
+        return [
+            'id'         => $this->getId(),
+            'post_id'    => $this->getPostId(),
+            'created_at' => $this->getCreatedAt()->format(\DateTime::W3C),
+            'content'    => $this->getContent(),
+            'user_id'    => $this->getUserId(),
+            'username'   => 'popraw mnie',
+            'mentions'   => $mentions->toArray(),
+            'avatar'     => '/uploads/avatars/20a0df7e56e1b00eb531a79c7eaf30a46cafc257.jpg',
+            'deletable'  => true
+        ];
     }
 }
