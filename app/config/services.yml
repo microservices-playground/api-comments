@@ -1,0 +1,10 @@
+parameters:
+#  parameter_name: value
+
+services:
+  comments.controller.list:
+    class: AppBundle\Controller\Comments\ListController
+  comments.controller.create:
+    class: AppBundle\Controller\Comments\CreateController
+  comments.controller.remove:
+    class: AppBundle\Controller\Comments\RemoveController

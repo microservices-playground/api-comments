@@ -1,0 +1,28 @@
+LegacyBundle\Entity\Mention:
+  type: entity
+  table: post_comments_mentions
+  indexes:
+    fk_comment:
+      columns: [post_comment_id]
+    fk_user:
+      columns: [user_id]
+  uniqueConstraints:
+    uq_comment_post:
+      columns: [post_comment_id, user_id]
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    userId:
+      type: integer
+  manyToOne:
+    comment:
+      targetEntity: LegacyBundle\Entity\Comment
+      inversedBy: mentions
+      joinColumn:
+        name: post_comment_id
+        referencedColumnName: id
+        nullable: false

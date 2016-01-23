@@ -1,0 +1,12 @@
+parameters:
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     api-comments
+    database_user:     root
+    database_password: root
+    legacy_database_host:     127.0.0.1
+    legacy_database_port:     ~
+    legacy_database_name:     foodlove
+    legacy_database_user:     root
+    legacy_database_password: root
+    secret:            ThisTokenIsNotSoSecretChangeIt

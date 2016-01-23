@@ -1,0 +1,25 @@
+default:
+  path:      /
+  defaults:  { _controller: AppBundle:Default:index }
+
+comments_list:
+  path:      /posts/{postId}/comments
+  methods:   [GET]
+  defaults:  { _controller: comments.controller.list:listAction }
+  requirements:
+    postId:  \d+
+
+comments_create:
+  path:      /posts/{postId}/comments
+  methods:   [POST]
+  defaults:  { _controller: comments.controller.create:createAction }
+  requirements:
+    postId:  \d+
+
+comments_remove:
+  path:      /posts/{postId}/comments/{commentId}
+  methods:   [DELETE]
+  defaults:  { _controller: comments.controller.remove:removeAction }
+  requirements:
+    postId:    \d+
+    commentId: \d+

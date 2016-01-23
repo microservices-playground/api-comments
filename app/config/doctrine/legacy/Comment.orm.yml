@@ -1,0 +1,30 @@
+LegacyBundle\Entity\Comment:
+  type: entity
+  table: post_comments
+  indexes:
+    fk_post:
+      columns: [post_id]
+    fk_user:
+      columns: [user_id]
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    postId:
+      type: integer
+    userId:
+      type: integer
+    content:
+      type: text
+    createdAt:
+      type: datetime
+    active:
+      type: boolean
+  oneToMany:
+    mentions:
+      targetEntity: LegacyBundle\Entity\Mention
+      mappedBy: comment
+      orphanRemoval: true

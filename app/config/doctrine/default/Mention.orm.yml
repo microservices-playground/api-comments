@@ -1,0 +1,23 @@
+AppBundle\Entity\Mention:
+  type: entity
+  table: mention
+  repositoryClass: AppBundle\Repository\MentionRepository
+  uniqueConstraints:
+    - columns: [comment_id, user_id]
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    userId:
+      type: integer
+  manyToOne:
+    comment:
+      targetEntity: AppBundle\Entity\Comment
+      inversedBy: mentions
+      joinColumn:
+        name: comment_id
+        referencedColumnName: id
+        nullable: false
