@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Comment implements \JsonSerializable
+class Comment implements \JsonSerializable, Entity
 {
     /**
      * @var int
@@ -127,9 +127,11 @@ class Comment implements \JsonSerializable
         return $this;
     }
 
-    public function removeMention(Mention $mention): void
+    public function removeMention(Mention $mention): Comment
     {
         $this->mentions->removeElement($mention);
+
+        return $this;
     }
 
     public function getMentions(): Collection
@@ -149,7 +151,7 @@ class Comment implements \JsonSerializable
             'created_at' => $this->getCreatedAt()->format(\DateTime::W3C),
             'content'    => $this->getContent(),
             'user_id'    => $this->getAuthor()->getUserId(),
-            'username'   => 'popraw mnie',
+            'username'   => $this->getAuthor()->getUsername(),
             'mentions'   => $mentions->toArray(),
             'avatar'     => '/uploads/avatars/20a0df7e56e1b00eb531a79c7eaf30a46cafc257.jpg',
             'deletable'  => true

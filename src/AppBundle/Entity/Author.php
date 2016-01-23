@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-class Author
+class Author implements Entity
 {
     /**
      * @var int

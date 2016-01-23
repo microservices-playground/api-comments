@@ -2,7 +2,7 @@
 
 namespace AppBundle\Entity;
 
-class Mention
+class Mention implements Entity
 {
     /**
      * @var int
@@ -10,14 +10,14 @@ class Mention
     private $id;
 
     /**
-     * @var Comment
-     */
-    private $comment;
-
-    /**
      * @var int
      */
     private $userId;
+
+    /**
+     * @var Comment
+     */
+    private $comment;
 
     public function setId(int $id): Mention
     {
