@@ -2,6 +2,7 @@
 
 namespace LegacyBundle\Command;
 
+use AppBundle\Entity\Author;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Mention;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -24,6 +25,7 @@ class LegacyDataCopyFromLegacyDbCommand extends ContainerAwareCommand
         $defaultEntityManager = $this->getContainer()->get('doctrine.orm.default_entity_manager');
         $legacyEntityManager = $this->getContainer()->get('doctrine.orm.legacy_entity_manager');
         $legacyCommentsRepository = $legacyEntityManager->getRepository('LegacyBundle:Comment');
+        $authorRepository = $defaultEntityManager->getRepository('AppBundle:Author');
 
         $legacyComments = $legacyCommentsRepository->findAll();
 
@@ -33,18 +35,31 @@ class LegacyDataCopyFromLegacyDbCommand extends ContainerAwareCommand
         $progress->setMessage('Copying legacy data');
 
         foreach ($legacyComments as $legacyComment) {
+            $userId = $legacyComment->getUser()->getId();
+            $author = $authorRepository->findOneBy(['userId' => $userId]);
+
+            if (null === $author) {
+                $author = new Author();
+                $author->setUserId($legacyComment->getUser()->getId());
+                $author->setUsername($legacyComment->getUser()->getUsername());
+                $author->setAvatarFilename('test.jpg');
+
+                $defaultEntityManager->persist($author);
+                $defaultEntityManager->flush($author);
+            }
+
             $comment = new Comment();
             $comment->setId($legacyComment->getId());
             $comment->setPostId($legacyComment->getPostId());
-            $comment->setAuthor($legacyComment->getUserId());
             $comment->setContent($legacyComment->getContent());
             $comment->setCreatedAt($legacyComment->getCreatedAt());
             $comment->setActive($legacyComment->getActive());
+            $comment->setAuthor($author);
 
             foreach ($legacyComment->getMentions() as $legacyMention) {
                 $mention = new Mention();
                 $mention->setId($legacyMention->getId());
-                $mention->setUserId($legacyMention->getUserId());
+                $mention->setUserId($legacyMention->getUser()->getId());
 
                 $comment->addMention($mention);
             }

@@ -1,0 +1,201 @@
+LegacyBundle\Entity\User:
+  type: entity
+  table: users
+  indexes:
+    facebook:
+      columns:
+        - facebook_id
+    lat:
+      columns:
+        - lat
+    lng:
+      columns:
+        - lng
+    device:
+      columns:
+        - device
+    notified_daily:
+      columns:
+        - notified_daily
+    notified_weekly:
+      columns:
+        - notified_weekly
+  uniqueConstraints:
+    uq_username:
+      columns:
+        - username
+    uq_email:
+      columns:
+        - email
+    uq_unsubscribe_token:
+      columns:
+        - unsubscribe_token
+    uq_hash:
+      columns:
+        - hash
+    uq_reset:
+      columns:
+        - reset_token
+  id:
+    id:
+      type: integer
+      nullable: false
+      options:
+        unsigned: true
+      id: true
+      generator:
+        strategy: IDENTITY
+  fields:
+    facebookId:
+      type: bigint
+      nullable: true
+      options:
+        unsigned: true
+      column: facebook_id
+    email:
+      type: string
+      nullable: false
+      length: 254
+      options:
+        fixed: false
+    emailWaiting:
+      type: string
+      nullable: true
+      length: 254
+      options:
+        fixed: false
+      column: email_waiting
+    username:
+      type: string
+      nullable: false
+      length: 254
+      options:
+        fixed: false
+    password:
+      type: string
+      nullable: false
+      length: 64
+      options:
+        fixed: false
+    logins:
+      type: integer
+      nullable: false
+      options:
+        unsigned: true
+    lastLogin:
+      type: integer
+      nullable: true
+      options:
+        unsigned: true
+      column: last_login
+    hash:
+      type: string
+      nullable: true
+      length: 20
+      options:
+        fixed: false
+    resetToken:
+      type: string
+      nullable: true
+      length: 30
+      options:
+        fixed: false
+      column: reset_token
+    emailToken:
+      type: string
+      nullable: true
+      length: 30
+      options:
+        fixed: false
+      column: email_token
+    company:
+      type: boolean
+      nullable: true
+      options:
+        default: '0'
+    lat:
+      type: decimal
+      nullable: true
+      precision: 10
+      scale: 7
+    lng:
+      type: decimal
+      nullable: true
+      precision: 10
+      scale: 7
+    device:
+      type: integer
+      nullable: true
+      options:
+        unsigned: false
+    pnsid:
+      type: string
+      nullable: true
+      length: 256
+      options:
+        fixed: false
+    name:
+      type: string
+      nullable: true
+      length: 256
+      options:
+        fixed: false
+    address:
+      type: string
+      nullable: true
+      length: 256
+      options:
+        fixed: false
+    postcode:
+      type: string
+      nullable: true
+      length: 64
+      options:
+        fixed: false
+    city:
+      type: string
+      nullable: true
+      length: 256
+      options:
+        fixed: false
+    country:
+      type: string
+      nullable: true
+      length: 256
+      options:
+        fixed: false
+    phone:
+      type: string
+      nullable: true
+      length: 64
+      options:
+        fixed: false
+    talent:
+      type: boolean
+      nullable: false
+    unreadActivities:
+      type: integer
+      nullable: false
+      options:
+        unsigned: true
+      column: unread_activities
+    unsubscribeToken:
+      type: string
+      nullable: false
+      length: 20
+      options:
+        fixed: false
+      column: unsubscribe_token
+    subscribed:
+      type: boolean
+      nullable: true
+      options:
+        default: '1'
+    notifiedDaily:
+      type: datetime
+      nullable: true
+      column: notified_daily
+    notifiedWeekly:
+      type: datetime
+      nullable: true
+      column: notified_weekly

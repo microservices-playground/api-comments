@@ -1,6 +1,8 @@
 AppBundle\Entity\Author:
   type: entity
   table: author
+  uniqueConstraints:
+    - columns: [user_id]
   id:
     id:
       type: integer

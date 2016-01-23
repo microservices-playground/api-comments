@@ -15,18 +15,18 @@ class Mention
     private $comment;
 
     /**
-     * @var int
+     * @var User
      */
-    private $userId;
+    private $user;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function getUserId(): int
+    public function getUser(): User
     {
-        return $this->userId;
+        return $this->user;
     }
 
     public function getComment(): Comment

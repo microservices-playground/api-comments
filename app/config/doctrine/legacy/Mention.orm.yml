@@ -15,10 +15,13 @@ LegacyBundle\Entity\Mention:
       id: true
       generator:
         strategy: AUTO
-  fields:
-    author:
-      type: integer
   manyToOne:
+    user:
+      targetEntity: LegacyBundle\Entity\User
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+        nullable: false
     comment:
       targetEntity: LegacyBundle\Entity\Comment
       inversedBy: mentions

@@ -18,11 +18,6 @@ class Comment
     private $postId;
 
     /**
-     * @var int
-     */
-    private $userId;
-
-    /**
      * @var string
      */
     private $content;
@@ -36,6 +31,11 @@ class Comment
      * @var bool
      */
     private $active;
+
+    /**
+     * @var User
+     */
+    private $user;
 
     /**
      * @var ArrayCollection
@@ -57,11 +57,6 @@ class Comment
         return $this->postId;
     }
 
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
-
     public function getContent(): string
     {
         return $this->content;
@@ -75,6 +70,11 @@ class Comment
     public function getActive(): bool
     {
         return $this->active;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
     }
 
     public function getMentions(): Collection

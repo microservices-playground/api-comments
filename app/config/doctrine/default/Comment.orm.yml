@@ -26,9 +26,10 @@ AppBundle\Entity\Comment:
     author:
       targetEntity: AppBundle\Entity\Author
       fetch: EAGER
+      cascade: [persist]
       joinColumn:
         name: author_id
-        referencedColumnName: user_id
+        referencedColumnName: id
         nullable: false
   oneToMany:
     mentions:
