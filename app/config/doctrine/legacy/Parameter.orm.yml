@@ -1,0 +1,26 @@
+LegacyBundle\Entity\Parameter:
+  type: entity
+  table: users_parameters
+  indexes:
+    fk_parameter:
+      columns: [parameter_id]
+    fk_user:
+      columns: [user_id]
+    value:
+      columns: [value]
+  uniqueConstraints:
+    uq_user_parameter:
+      columns: [user_id, parameter_id]
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    userId:
+      type: integer
+    parameterId:
+      type: integer
+    value:
+      type: text

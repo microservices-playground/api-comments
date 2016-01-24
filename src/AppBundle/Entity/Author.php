@@ -20,7 +20,7 @@ class Author implements Entity
     private $username;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $avatarFilename;
 
@@ -53,12 +53,12 @@ class Author implements Entity
         return $this;
     }
 
-    public function getAvatarFilename(): string
+    public function getAvatarFilename()
     {
         return $this->avatarFilename;
     }
 
-    public function setAvatarFilename(string $avatarFilename): Author
+    public function setAvatarFilename($avatarFilename): Author
     {
         $this->avatarFilename = $avatarFilename;
 

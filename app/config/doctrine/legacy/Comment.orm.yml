@@ -24,7 +24,6 @@ LegacyBundle\Entity\Comment:
   manyToOne:
     user:
       targetEntity: LegacyBundle\Entity\User
-      fetch: EAGER
       joinColumn:
         name: user_id
         referencedColumnName: id

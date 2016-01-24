@@ -25,6 +25,7 @@ class LegacyDataCopyFromLegacyDbCommand extends ContainerAwareCommand
         $defaultEntityManager = $this->getContainer()->get('doctrine.orm.default_entity_manager');
         $legacyEntityManager = $this->getContainer()->get('doctrine.orm.legacy_entity_manager');
         $legacyCommentsRepository = $legacyEntityManager->getRepository('LegacyBundle:Comment');
+        $legacyParameterRepository = $legacyEntityManager->getRepository('LegacyBundle:Parameter');
         $authorRepository = $defaultEntityManager->getRepository('AppBundle:Author');
 
         $legacyComments = $legacyCommentsRepository->findAll();
@@ -42,7 +43,15 @@ class LegacyDataCopyFromLegacyDbCommand extends ContainerAwareCommand
                 $author = new Author();
                 $author->setUserId($legacyComment->getUser()->getId());
                 $author->setUsername($legacyComment->getUser()->getUsername());
-                $author->setAvatarFilename('test.jpg');
+
+                $avatarParameter = $legacyParameterRepository->findOneBy([
+                    'userId'      => $legacyComment->getUser()->getId(),
+                    'parameterId' => 4
+                ]);
+
+                if (null !== $avatarParameter) {
+                    $author->setAvatarFilename($avatarParameter->getValue());
+                }
 
                 $defaultEntityManager->persist($author);
                 $defaultEntityManager->flush($author);

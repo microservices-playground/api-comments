@@ -1,11 +1,11 @@
 <?php
 
-namespace AppBundle\Transformer;
+namespace AppBundle\Mapper;
 
 use AppBundle\Dto\IncomingDto;
 use AppBundle\Entity\Entity;
 
-interface DtoToEntityTransformer
+interface DtoToEntityMapper
 {
     public function transform(IncomingDto $dto): Entity;
 }

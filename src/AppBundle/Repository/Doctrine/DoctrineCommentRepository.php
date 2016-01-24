@@ -12,7 +12,7 @@ class DoctrineCommentRepository extends EntityRepository implements CommentRepos
         $queryBuilder = $this->createQueryBuilder('c');
 
         $queryBuilder
-            ->join('c.mentions', 'm')
+            ->leftJoin('c.mentions', 'm')
             ->where('c.postId = :postId')
             ->orderBy('c.createdAt', 'DESC')
             ->setParameter(':postId', $postId);

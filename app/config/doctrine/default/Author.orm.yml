@@ -18,3 +18,4 @@ AppBundle\Entity\Author:
     avatarFilename:
       type: string
       length: 255
+      nullable: true

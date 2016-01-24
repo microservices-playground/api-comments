@@ -3,7 +3,7 @@
 namespace AppBundle\Controller\Comments;
 
 use AppBundle\Repository\CommentRepository;
-use AppBundle\Transformer\EntityToDtoTransformer;
+use AppBundle\Mapper\EntityToDtoMapper;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ListController
@@ -14,20 +14,20 @@ class ListController
     private $commentRepository;
 
     /**
-     * @var EntityToDtoTransformer
+     * @var EntityToDtoMapper
      */
-    private $commentsTransformer;
+    private $commentsMapper;
 
-    public function __construct(CommentRepository $commentRepository, EntityToDtoTransformer $commentsTransformer)
+    public function __construct(CommentRepository $commentRepository, EntityToDtoMapper $commentsMapper)
     {
         $this->commentRepository = $commentRepository;
-        $this->commentsTransformer = $commentsTransformer;
+        $this->commentsMapper = $commentsMapper;
     }
 
     public function listAction(int $postId): JsonResponse
     {
         $comments = $this->commentRepository->getCommentsByPostId($postId);
-        $dtoComments = $this->commentsTransformer->transformCollection($comments);
+        $dtoComments = $this->commentsMapper->transformCollection($comments);
 
         return new JsonResponse($dtoComments);
     }

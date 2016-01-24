@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Transformer\EntityToDto;
+namespace AppBundle\Mapper\EntityToDto;
 
 use AppBundle\Dto\Outgoing\Comment as CommentDto;
 use AppBundle\Dto\Outgoing\CommentCollection;
@@ -8,11 +8,22 @@ use AppBundle\Dto\OutgoingDto;
 use AppBundle\Dto\OutgoingDtoCollection;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Mention;
-use AppBundle\Transformer\EntityToDtoTransformer;
+use AppBundle\Mapper\EntityToDtoMapper;
 use AppBundle\Entity\Entity;
+use AppBundle\Service\UploadPathResolver\UploadPathResolver;
 
-class CommentEntityToDtoTransformer implements EntityToDtoTransformer
+class CommentMapper implements EntityToDtoMapper
 {
+    /**
+     * @var UploadPathResolver
+     */
+    private $avatarUploadPathResolver;
+
+    public function __construct(UploadPathResolver $avatarUploadPathResolver)
+    {
+        $this->avatarUploadPathResolver = $avatarUploadPathResolver;
+    }
+
     public function transform(Entity $comment): OutgoingDto
     {
         /** @var Comment $comment */
@@ -20,6 +31,8 @@ class CommentEntityToDtoTransformer implements EntityToDtoTransformer
         $mentions = $comment->getMentions()->map(function (Mention $mention) {
             return $mention->getUserId() . 'popraw mnie bo tu ma byc username';
         })->toArray();
+
+        $avatar = $this->avatarUploadPathResolver->getUploadPath($comment->getAuthor()->getAvatarFilename());
 
         return new CommentDto(
             $comment->getId(),
@@ -29,7 +42,7 @@ class CommentEntityToDtoTransformer implements EntityToDtoTransformer
             $comment->getAuthor()->getUserId(),
             $comment->getAuthor()->getUsername(),
             $mentions,
-            '/uploads/avatars/20a0df7e56e1b00eb531a79c7eaf30a46cafc257.jpg',
+            $avatar,
             true
         );
     }

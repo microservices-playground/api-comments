@@ -1,12 +1,13 @@
 parameters:
-#  parameter_name: value
+  avatar.default_avatar: "/assets/img/default_avatar.png"
+  avatar.upload_path: "/uploads/avatars"
 
 services:
   comments.controller.list:
     class: AppBundle\Controller\Comments\ListController
     arguments:
       - "@comments.repository.comment"
-      - "@comments.transformer.entity_to_dto.comment"
+      - "@comments.mapper.entity_to_dto.comment"
   comments.controller.create:
     class: AppBundle\Controller\Comments\CreateController
   comments.controller.remove:
@@ -23,5 +24,17 @@ services:
     arguments:
       - AppBundle\Entity\Mention
 
-  comments.transformer.entity_to_dto.comment:
-    class: AppBundle\Transformer\EntityToDto\CommentEntityToDtoTransformer
+  comments.mapper.entity_to_dto.comment:
+    class: AppBundle\Mapper\EntityToDto\CommentMapper
+    arguments:
+      - "@comments.upload_path_resolver.avatar"
+
+  comments.configuration_fetcher.local:
+    class: AppBundle\Service\ConfigurationFetcher\LocalConfigurationFetcher
+    calls:
+      - [setParameterBag, ["@=service('service_container').getParameterBag()"]]
+
+  comments.upload_path_resolver.avatar:
+    class: AppBundle\Service\UploadPathResolver\Avatar\AvatarUploadPathResolver
+    arguments:
+      - "@comments.configuration_fetcher.local"
