@@ -31,9 +31,16 @@ AppBundle\Entity\Comment:
         name: author_id
         referencedColumnName: id
         nullable: false
-  oneToMany:
+  manyToMany:
     mentions:
       targetEntity: AppBundle\Entity\Mention
       cascade: [persist]
-      mappedBy: comment
       orphanRemoval: true
+      joinTable:
+        name: comment_to_mention
+        joinColumns:
+          comment_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          mention_id:
+            referencedColumnName: id

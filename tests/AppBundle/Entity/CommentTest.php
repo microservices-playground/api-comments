@@ -72,10 +72,10 @@ class CommentTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($this->comment->getMentions());
 
         $mention1 = new Mention();
-        $mention1->setId(73);
+        $mention1->setUserId(73);
 
         $mention2 = new Mention();
-        $mention2->setId(89);
+        $mention2->setUserId(89);
 
         $this->comment->addMention($mention1);
         $this->comment->addMention($mention2);

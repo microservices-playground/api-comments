@@ -2,8 +2,8 @@
 
 namespace AppBundle\Dto\Incoming;
 
-use AppBundle\Dto\OutgoingDto;
+use AppBundle\Dto\IncomingDto;
 
-class Comment implements OutgoingDto
+class Comment implements IncomingDto
 {
 }

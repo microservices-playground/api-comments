@@ -15,16 +15,9 @@ class Mention implements Entity
     private $userId;
 
     /**
-     * @var Comment
+     * @var string
      */
-    private $comment;
-
-    public function setId(int $id): Mention
-    {
-        $this->id = $id;
-
-        return $this;
-    }
+    private $username;
 
     public function getId(): int
     {
@@ -43,15 +36,15 @@ class Mention implements Entity
         return $this->userId;
     }
 
-    public function setComment(Comment $comment): Mention
+    public function getUsername(): string
     {
-        $this->comment = $comment;
-
-        return $this;
+        return $this->username;
     }
 
-    public function getComment(): Comment
+    public function setUsername(string $username): Mention
     {
-        return $this->comment;
+        $this->username = $username;
+
+        return $this;
     }
 }

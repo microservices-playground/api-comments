@@ -29,7 +29,7 @@ class CommentMapper implements EntityToDtoMapper
         /** @var Comment $comment */
 
         $mentions = $comment->getMentions()->map(function (Mention $mention) {
-            return $mention->getUserId() . 'popraw mnie bo tu ma byc username';
+            return $mention->getUsername();
         })->toArray();
 
         $avatar = $this->avatarUploadPathResolver->getUploadPath($comment->getAuthor()->getAvatarFilename());

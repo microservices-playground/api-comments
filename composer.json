@@ -33,7 +33,7 @@
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^2.7",
         "phpunit/phpunit": "^5.1.0",
-        "mockery/mockery": "^0.9.4"
+        "mockery/mockery": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

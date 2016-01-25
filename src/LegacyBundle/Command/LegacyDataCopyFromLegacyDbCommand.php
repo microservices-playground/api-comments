@@ -27,6 +27,7 @@ class LegacyDataCopyFromLegacyDbCommand extends ContainerAwareCommand
         $legacyCommentsRepository = $legacyEntityManager->getRepository('LegacyBundle:Comment');
         $legacyParameterRepository = $legacyEntityManager->getRepository('LegacyBundle:Parameter');
         $authorRepository = $defaultEntityManager->getRepository('AppBundle:Author');
+        $mentionRepository = $defaultEntityManager->getRepository('AppBundle:Mention');
 
         $legacyComments = $legacyCommentsRepository->findAll();
 
@@ -66,9 +67,16 @@ class LegacyDataCopyFromLegacyDbCommand extends ContainerAwareCommand
             $comment->setAuthor($author);
 
             foreach ($legacyComment->getMentions() as $legacyMention) {
-                $mention = new Mention();
-                $mention->setId($legacyMention->getId());
-                $mention->setUserId($legacyMention->getUser()->getId());
+                $mention = $mentionRepository->findOneBy(['userId' => $legacyMention->getUser()->getId()]);
+
+                if (null === $mention) {
+                    $mention = new Mention();
+                    $mention->setUserId($legacyMention->getUser()->getId());
+                    $mention->setUsername($legacyMention->getUser()->getUsername());
+
+                    $defaultEntityManager->persist($mention);
+                    $defaultEntityManager->flush($mention);
+                }
 
                 $comment->addMention($mention);
             }

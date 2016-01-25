@@ -122,7 +122,6 @@ class Comment implements Entity
     public function addMention(Mention $mention): Comment
     {
         $this->mentions[] = $mention;
-        $mention->setComment($this);
 
         return $this;
     }

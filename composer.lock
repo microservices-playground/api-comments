@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0c075231890a66211cdd4dcb277c1a16",
-    "content-hash": "a63aa1124b77a794bbb9c771d7b56e16",
+    "hash": "88a37d71e446636922ac7ee9ba9daba5",
+    "content-hash": "809b0f9799a28b748b0d8cdcf9a8c7bc",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1884,22 +1884,22 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "0.9.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "70bba85e4aabc9449626651f48b9018ede04f86b"
+                "reference": "1a9bde4985f4a125ed7287be7d9f4d3df25d5d10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/70bba85e4aabc9449626651f48b9018ede04f86b",
-                "reference": "70bba85e4aabc9449626651f48b9018ede04f86b",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/1a9bde4985f4a125ed7287be7d9f4d3df25d5d10",
+                "reference": "1a9bde4985f4a125ed7287be7d9f4d3df25d5d10",
                 "shasum": ""
             },
             "require": {
                 "hamcrest/hamcrest-php": "~1.1",
                 "lib-pcre": ">=7.0",
-                "php": ">=5.3.2"
+                "php": ">=5.4.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0"
@@ -1907,7 +1907,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.9.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
@@ -1945,7 +1945,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2015-04-02 19:54:00"
+            "time": "2015-12-14 11:56:42"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2991,7 +2991,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "mockery/mockery": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
