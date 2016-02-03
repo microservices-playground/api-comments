@@ -78,3 +78,12 @@ doctrine:
                         alias:     LegacyBundle
                         dir:       %kernel.root_dir%/config/doctrine/legacy
                         is_bundle: false
+nelmio_cors:
+    defaults:
+        allow_origin: ["*"]
+        allow_headers: ["Content-Type"]
+    paths:
+        '^/posts/[0-9]+/comments':
+            allow_methods: ["GET", "POST"]
+        '^/posts/[0-9]+/comments/[0-9]+':
+            allow_methods: ["DELETE"]

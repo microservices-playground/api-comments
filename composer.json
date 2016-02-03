@@ -27,7 +27,8 @@
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "gedmo/doctrine-extensions": "^2.4.9"
+        "gedmo/doctrine-extensions": "^2.4.9",
+        "nelmio/cors-bundle": "^1.4.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -9,6 +9,6 @@ class CreateController
 {
     public function createAction(Request $request, int $postId): Response
     {
-        return new Response('create_comments ' . $postId);
+        return new Response('create_comments ' . $postId, 201);
     }
 }
