@@ -48,14 +48,6 @@ class CommentMapper implements EntityToDtoMapper
 
     public function transformCollection(array $comments): array
     {
-        /** @var Comment[] $comments */
-
-        $commentsDto = [];
-
-        foreach ($comments as $comment) {
-            $commentsDto[] = $this->transform($comment);
-        }
-
-        return $commentsDto;
+        return array_map([$this, 'transform'], $comments);
     }
 }
