@@ -1,4 +1,4 @@
-LegacyBundle\Entity\User:
+Foodlove\LegacyBundle\Entity\User:
   type: entity
   table: users
   indexes:

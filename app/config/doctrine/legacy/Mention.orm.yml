@@ -1,4 +1,4 @@
-LegacyBundle\Entity\Mention:
+Foodlove\LegacyBundle\Entity\Mention:
   type: entity
   table: post_comments_mentions
   indexes:
@@ -17,13 +17,13 @@ LegacyBundle\Entity\Mention:
         strategy: AUTO
   manyToOne:
     user:
-      targetEntity: LegacyBundle\Entity\User
+      targetEntity: Foodlove\LegacyBundle\Entity\User
       joinColumn:
         name: user_id
         referencedColumnName: id
         nullable: false
     comment:
-      targetEntity: LegacyBundle\Entity\CommentDto
+      targetEntity: Foodlove\LegacyBundle\Entity\Comment
       inversedBy: mentions
       joinColumn:
         name: post_comment_id

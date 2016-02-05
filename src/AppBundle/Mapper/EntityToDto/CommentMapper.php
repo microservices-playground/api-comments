@@ -1,14 +1,14 @@
 <?php
 
-namespace AppBundle\Mapper\EntityToDto;
+namespace Foodlove\AppBundle\Mapper\EntityToDto;
 
-use AppBundle\Dto\Dto\CommentDto;
-use AppBundle\Dto\Dto;
-use AppBundle\Entity\Comment;
-use AppBundle\Entity\Mention;
-use AppBundle\Mapper\EntityToDtoMapper;
-use AppBundle\Entity\Entity;
-use AppBundle\Service\UploadPathResolver\UploadPathResolver;
+use Foodlove\AppBundle\Dto\Dto\CommentDto;
+use Foodlove\AppBundle\Dto\Dto;
+use Foodlove\AppBundle\Entity\Comment;
+use Foodlove\AppBundle\Entity\Mention;
+use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
+use Foodlove\AppBundle\Entity\Entity;
+use Foodlove\AppBundle\Service\UploadPathResolver\UploadPathResolver;
 
 class CommentMapper implements EntityToDtoMapper
 {

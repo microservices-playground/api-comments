@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Repository\Doctrine;
+namespace Foodlove\AppBundle\Repository\Doctrine;
 
-use AppBundle\Repository\CommentRepository;
+use Foodlove\AppBundle\Repository\CommentRepository;
 use Doctrine\ORM\EntityRepository;
 
 class DoctrineCommentRepository extends EntityRepository implements CommentRepository

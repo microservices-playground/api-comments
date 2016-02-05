@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service\ResponseFactory;
+namespace Foodlove\AppBundle\Service\ResponseFactory;
 
 use Symfony\Component\HttpFoundation\Response;
 

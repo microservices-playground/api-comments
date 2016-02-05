@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\AppBundle\Service\UploadPathResolver\Avatar;
+namespace Foodlove\AppBundle\Service\UploadPathResolver\Avatar;
 
-use AppBundle\Service\ConfigurationFetcher\ConfigurationFetcher;
-use AppBundle\Service\UploadPathResolver\Avatar\AvatarUploadPathResolver;
+use Foodlove\AppBundle\Service\ConfigurationFetcher\ConfigurationFetcher;
+use Foodlove\AppBundle\Service\UploadPathResolver\Avatar\AvatarUploadPathResolver;
 use Mockery as m;
 
 class AvatarUploadPathResolverTest extends \PHPUnit_Framework_TestCase

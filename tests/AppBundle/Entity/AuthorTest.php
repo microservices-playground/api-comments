@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\AppBundle\Entity;
+namespace Foodlove\AppBundle\Entity;
 
-use AppBundle\Entity\Author;
+use Foodlove\AppBundle\Entity\Author;
 
 class AuthorTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace Foodlove\AppBundle\Entity;
 
 class Mention implements Entity
 {

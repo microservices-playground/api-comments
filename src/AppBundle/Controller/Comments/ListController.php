@@ -1,10 +1,10 @@
 <?php
 
-namespace AppBundle\Controller\Comments;
+namespace Foodlove\AppBundle\Controller\Comments;
 
-use AppBundle\Repository\CommentRepository;
-use AppBundle\Mapper\EntityToDtoMapper;
-use AppBundle\Service\ResponseFactory\ResponseFactory;
+use Foodlove\AppBundle\Repository\CommentRepository;
+use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
+use Foodlove\AppBundle\Service\ResponseFactory\ResponseFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ListController

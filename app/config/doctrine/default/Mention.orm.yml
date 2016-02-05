@@ -1,7 +1,7 @@
-AppBundle\Entity\Mention:
+Foodlove\AppBundle\Entity\Mention:
   type: entity
   table: mention
-  repositoryClass: AppBundle\Repository\Doctrine\DoctrineMentionRepository
+  repositoryClass: Foodlove\AppBundle\Repository\Doctrine\DoctrineMentionRepository
   uniqueConstraints:
     - columns: [user_id]
   id:

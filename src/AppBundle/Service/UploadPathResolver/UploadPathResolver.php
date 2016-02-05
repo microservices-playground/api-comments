@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service\UploadPathResolver;
+namespace Foodlove\AppBundle\Service\UploadPathResolver;
 
 interface UploadPathResolver
 {

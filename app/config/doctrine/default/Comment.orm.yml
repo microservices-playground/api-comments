@@ -1,7 +1,7 @@
-AppBundle\Entity\Comment:
+Foodlove\AppBundle\Entity\Comment:
   type: entity
   table: comment
-  repositoryClass: AppBundle\Repository\Doctrine\DoctrineCommentRepository
+  repositoryClass: Foodlove\AppBundle\Repository\Doctrine\DoctrineCommentRepository
   indexes:
     - columns: [post_id]
   id:
@@ -24,7 +24,7 @@ AppBundle\Entity\Comment:
       type: boolean
   manyToOne:
     author:
-      targetEntity: AppBundle\Entity\Author
+      targetEntity: Foodlove\AppBundle\Entity\Author
       fetch: EAGER
       cascade: [persist]
       joinColumn:
@@ -33,7 +33,7 @@ AppBundle\Entity\Comment:
         nullable: false
   manyToMany:
     mentions:
-      targetEntity: AppBundle\Entity\Mention
+      targetEntity: Foodlove\AppBundle\Entity\Mention
       cascade: [persist]
       orphanRemoval: true
       joinTable:

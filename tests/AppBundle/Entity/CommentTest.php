@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\AppBundle\Entity;
+namespace Foodlove\AppBundle\Entity;
 
-use AppBundle\Entity\Author;
-use AppBundle\Entity\Comment;
-use AppBundle\Entity\Mention;
+use Foodlove\AppBundle\Entity\Author;
+use Foodlove\AppBundle\Entity\Comment;
+use Foodlove\AppBundle\Entity\Mention;
 use Doctrine\Common\Collections\Collection;
 
 class CommentTest extends \PHPUnit_Framework_TestCase

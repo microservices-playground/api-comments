@@ -1,4 +1,4 @@
-LegacyBundle\Entity\Comment:
+Foodlove\LegacyBundle\Entity\Comment:
   type: entity
   table: post_comments
   indexes:
@@ -23,13 +23,13 @@ LegacyBundle\Entity\Comment:
       type: boolean
   manyToOne:
     user:
-      targetEntity: LegacyBundle\Entity\User
+      targetEntity: Foodlove\LegacyBundle\Entity\User
       joinColumn:
         name: user_id
         referencedColumnName: id
         nullable: false
   oneToMany:
     mentions:
-      targetEntity: LegacyBundle\Entity\Mention
+      targetEntity: Foodlove\LegacyBundle\Entity\Mention
       mappedBy: comment
       orphanRemoval: true

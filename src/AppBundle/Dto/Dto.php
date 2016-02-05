@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Dto;
+namespace Foodlove\AppBundle\Dto;
 
 interface Dto
 {

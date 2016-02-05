@@ -1,6 +1,6 @@
 <?php
 
-namespace LegacyBundle;
+namespace Foodlove\LegacyBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

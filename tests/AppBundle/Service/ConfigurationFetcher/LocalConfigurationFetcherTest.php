@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\AppBundle\Service\ConfigurationFetcher;
+namespace Foodlove\AppBundle\Service\ConfigurationFetcher;
 
-use AppBundle\Service\ConfigurationFetcher\LocalConfigurationFetcher;
+use Foodlove\AppBundle\Service\ConfigurationFetcher\LocalConfigurationFetcher;
 use Mockery as m;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 

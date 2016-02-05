@@ -4,52 +4,48 @@ parameters:
 
 services:
   comments.controller.list:
-    class: AppBundle\Controller\Comments\ListController
+    class: Foodlove\AppBundle\Controller\Comments\ListController
     arguments:
       - "@comments.response.factory.dto"
       - "@comments.repository.comment"
       - "@comments.mapper.entity_to_dto.comment"
   comments.controller.create:
-    class: AppBundle\Controller\Comments\CreateController
+    class: Foodlove\AppBundle\Controller\Comments\CreateController
     arguments:
       - "@comments.response.factory.dto"
       - "@serializer"
       - "@validator"
   comments.controller.remove:
-    class: AppBundle\Controller\Comments\RemoveController
+    class: Foodlove\AppBundle\Controller\Comments\RemoveController
 
   comments.repository.comment:
-    class: AppBundle\Repository\CommentRepository
+    class: Foodlove\AppBundle\Repository\CommentRepository
     factory: ["@doctrine.orm.default_entity_manager", getRepository]
     arguments:
-      - AppBundle\Entity\Comment
+      - Foodlove\AppBundle\Entity\Comment
   comments.repository.mention:
-    class: AppBundle\Repository\MentionRepository
+    class: Foodlove\AppBundle\Repository\MentionRepository
     factory: ["@doctrine.orm.default_entity_manager", getRepository]
     arguments:
-      - AppBundle\Entity\Mention
+      - Foodlove\AppBundle\Entity\Mention
 
   comments.mapper.entity_to_dto.comment:
-    class: AppBundle\Mapper\EntityToDto\CommentMapper
+    class: Foodlove\AppBundle\Mapper\EntityToDto\CommentMapper
     arguments:
       - "@comments.upload_path_resolver.avatar"
 
   comments.configuration_fetcher.local:
-    class: AppBundle\Service\ConfigurationFetcher\LocalConfigurationFetcher
+    class: Foodlove\AppBundle\Service\ConfigurationFetcher\LocalConfigurationFetcher
     calls:
       - [setParameterBag, ["@=service('service_container').getParameterBag()"]]
 
   comments.upload_path_resolver.avatar:
-    class: AppBundle\Service\UploadPathResolver\Avatar\AvatarUploadPathResolver
+    class: Foodlove\AppBundle\Service\UploadPathResolver\Avatar\AvatarUploadPathResolver
     arguments:
       - "@comments.configuration_fetcher.local"
 
-  comments.response.factory.serialized_json:
-    class: AppBundle\Service\ResponseFactory\SerializedJsonResponseFactory
-    arguments:
-      - "@serializer.encoder.json"
   comments.response.factory.dto:
-    class: AppBundle\Service\ResponseFactory\DtoResponseFactory
+    class: Foodlove\AppBundle\Service\ResponseFactory\DtoResponseFactory
     arguments:
       - "@serializer"
 

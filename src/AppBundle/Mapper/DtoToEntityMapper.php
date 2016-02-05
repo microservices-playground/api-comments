@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Mapper;
+namespace Foodlove\AppBundle\Mapper;
 
-use AppBundle\Dto\Dto;
-use AppBundle\Entity\Entity;
+use Foodlove\AppBundle\Dto\Dto;
+use Foodlove\AppBundle\Entity\Entity;
 
 interface DtoToEntityMapper
 {

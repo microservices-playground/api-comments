@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Service\UploadPathResolver\Avatar;
+namespace Foodlove\AppBundle\Service\UploadPathResolver\Avatar;
 
-use AppBundle\Service\ConfigurationFetcher\ConfigurationFetcher;
-use AppBundle\Service\UploadPathResolver\UploadPathResolver;
+use Foodlove\AppBundle\Service\ConfigurationFetcher\ConfigurationFetcher;
+use Foodlove\AppBundle\Service\UploadPathResolver\UploadPathResolver;
 
 class AvatarUploadPathResolver implements UploadPathResolver
 {

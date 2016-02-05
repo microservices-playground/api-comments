@@ -1,4 +1,4 @@
-AppBundle\Dto\Dto\CommentDto:
+Foodlove\AppBundle\Dto\Dto\CommentDto:
   attributes:
     id:
       groups: ["expose"]

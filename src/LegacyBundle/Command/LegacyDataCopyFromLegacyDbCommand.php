@@ -1,10 +1,10 @@
 <?php
 
-namespace LegacyBundle\Command;
+namespace Foodlove\LegacyBundle\Command;
 
-use AppBundle\Entity\Author;
-use AppBundle\Entity\Comment;
-use AppBundle\Entity\Mention;
+use Foodlove\AppBundle\Entity\Author;
+use Foodlove\AppBundle\Entity\Comment;
+use Foodlove\AppBundle\Entity\Mention;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;

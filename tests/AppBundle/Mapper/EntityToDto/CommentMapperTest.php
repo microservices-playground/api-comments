@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\AppBundle\Mapper\EntityToDto;
+namespace Foodlove\AppBundle\Mapper\EntityToDto;
 
-use AppBundle\Dto\Dto\CommentDto;
-use AppBundle\Entity\Author;
-use AppBundle\Entity\Comment;
-use AppBundle\Mapper\EntityToDto\CommentMapper;
-use AppBundle\Service\UploadPathResolver\UploadPathResolver;
+use Foodlove\AppBundle\Dto\Dto\CommentDto;
+use Foodlove\AppBundle\Entity\Author;
+use Foodlove\AppBundle\Entity\Comment;
+use Foodlove\AppBundle\Mapper\EntityToDto\CommentMapper;
+use Foodlove\AppBundle\Service\UploadPathResolver\UploadPathResolver;
 use Doctrine\Common\Collections\ArrayCollection;
 use Mockery as m;
 

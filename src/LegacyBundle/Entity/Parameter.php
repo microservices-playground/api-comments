@@ -1,6 +1,6 @@
 <?php
 
-namespace LegacyBundle\Entity;
+namespace Foodlove\LegacyBundle\Entity;
 
 class Parameter
 {

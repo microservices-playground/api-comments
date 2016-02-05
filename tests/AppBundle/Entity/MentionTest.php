@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\AppBundle\Entity;
+namespace Foodlove\AppBundle\Entity;
 
-use AppBundle\Entity\Mention;
+use Foodlove\AppBundle\Entity\Mention;
 
 class MentionTest extends \PHPUnit_Framework_TestCase
 {

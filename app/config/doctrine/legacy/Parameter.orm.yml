@@ -1,4 +1,4 @@
-LegacyBundle\Entity\Parameter:
+Foodlove\LegacyBundle\Entity\Parameter:
   type: entity
   table: users_parameters
   indexes:

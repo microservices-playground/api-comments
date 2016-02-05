@@ -1,4 +1,4 @@
-AppBundle\Entity\Author:
+Foodlove\AppBundle\Entity\Author:
   type: entity
   table: author
   uniqueConstraints:

@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Dto\Dto;
+namespace Foodlove\AppBundle\Dto\Dto;
 
-use AppBundle\Dto\Dto;
+use Foodlove\AppBundle\Dto\Dto;
 
 class CommentDto implements Dto
 {

@@ -13,8 +13,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
-            new AppBundle\AppBundle(),
-            new LegacyBundle\LegacyBundle(),
+            new Foodlove\AppBundle\AppBundle(),
+            new Foodlove\LegacyBundle\LegacyBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

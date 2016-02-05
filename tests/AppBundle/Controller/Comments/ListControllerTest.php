@@ -1,12 +1,10 @@
 <?php
 
-namespace Tests\AppBundle\Controller\Comments;
+namespace Foodlove\AppBundle\Controller\Comments;
 
-use AppBundle\Controller\Comments\ListController;
-use AppBundle\Dto\CollectionDto;
-use AppBundle\Mapper\EntityToDtoMapper;
-use AppBundle\Repository\CommentRepository;
-use AppBundle\Service\ResponseFactory\ResponseFactory;
+use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
+use Foodlove\AppBundle\Repository\CommentRepository;
+use Foodlove\AppBundle\Service\ResponseFactory\ResponseFactory;
 use Mockery as m;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

@@ -65,7 +65,7 @@ doctrine:
                     default:
                         mapping:   true
                         type:      yml
-                        prefix:    AppBundle\Entity
+                        prefix:    Foodlove\AppBundle\Entity
                         alias:     AppBundle
                         dir:       %kernel.root_dir%/config/doctrine/default
                         is_bundle: false
@@ -76,7 +76,7 @@ doctrine:
                     default:
                         mapping:   true
                         type:      yml
-                        prefix:    LegacyBundle\Entity
+                        prefix:    Foodlove\LegacyBundle\Entity
                         alias:     LegacyBundle
                         dir:       %kernel.root_dir%/config/doctrine/legacy
                         is_bundle: false

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service\ConfigurationFetcher;
+namespace Foodlove\AppBundle\Service\ConfigurationFetcher;
 
 interface ConfigurationFetcher
 {
