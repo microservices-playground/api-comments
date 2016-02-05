@@ -1,0 +1,20 @@
+AppBundle\Dto\Dto\CommentDto:
+  attributes:
+    id:
+      groups: ["expose"]
+    postId:
+      groups: ["expose"]
+    createdAt:
+      groups: ["expose"]
+    content:
+      groups: ["expose", "create"]
+    userId:
+      groups: ["expose"]
+    username:
+      groups: ["expose"]
+    mentions:
+      groups: ["expose"]
+    avatar:
+      groups: ["expose"]
+    deletable:
+      groups: ["expose"]

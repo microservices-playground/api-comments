@@ -25,3 +25,6 @@ monolog:
             level: debug
         console:
             type:  console
+nelmio_cors:
+    defaults:
+        max_age: 3600

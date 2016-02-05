@@ -23,7 +23,7 @@ LegacyBundle\Entity\Mention:
         referencedColumnName: id
         nullable: false
     comment:
-      targetEntity: LegacyBundle\Entity\Comment
+      targetEntity: LegacyBundle\Entity\CommentDto
       inversedBy: mentions
       joinColumn:
         name: post_comment_id

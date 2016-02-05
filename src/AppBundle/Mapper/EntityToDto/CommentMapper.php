@@ -2,10 +2,10 @@
 
 namespace AppBundle\Mapper\EntityToDto;
 
-use AppBundle\Dto\Outgoing\Comment as CommentDto;
-use AppBundle\Dto\Outgoing\CommentCollection;
-use AppBundle\Dto\OutgoingDto;
-use AppBundle\Dto\OutgoingDtoCollection;
+use AppBundle\Dto\Dto\CommentDto;
+use AppBundle\Dto\CollectionDto\CommentCollectionDto;
+use AppBundle\Dto\Dto;
+use AppBundle\Dto\CollectionDto;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Mention;
 use AppBundle\Mapper\EntityToDtoMapper;
@@ -24,7 +24,7 @@ class CommentMapper implements EntityToDtoMapper
         $this->avatarUploadPathResolver = $avatarUploadPathResolver;
     }
 
-    public function transform(Entity $comment): OutgoingDto
+    public function transform(Entity $comment): Dto
     {
         /** @var Comment $comment */
 
@@ -34,20 +34,21 @@ class CommentMapper implements EntityToDtoMapper
 
         $avatar = $this->avatarUploadPathResolver->getUploadPath($comment->getAuthor()->getAvatarFilename());
 
-        return new CommentDto(
-            $comment->getId(),
-            $comment->getPostId(),
-            $comment->getCreatedAt()->format('Y-m-d H:i:s'),
-            $comment->getContent(),
-            $comment->getAuthor()->getUserId(),
-            $comment->getAuthor()->getUsername(),
-            $mentions,
-            $avatar,
-            true
-        );
+        $commentDto = new CommentDto();
+        $commentDto->id = $comment->getId();
+        $commentDto->postId = $comment->getPostId();
+        $commentDto->createdAt = $comment->getCreatedAt()->format('Y-m-d H:i:s');
+        $commentDto->content = $comment->getContent();
+        $commentDto->userId = $comment->getAuthor()->getUserId();
+        $commentDto->username = $comment->getAuthor()->getUsername();
+        $commentDto->mentions = $mentions;
+        $commentDto->avatar = $avatar;
+        $commentDto->deletable = true;
+
+        return $commentDto;
     }
 
-    public function transformCollection(array $comments): OutgoingDtoCollection
+    public function transformCollection(array $comments): CollectionDto
     {
         /** @var Comment[] $comments */
 
@@ -57,6 +58,6 @@ class CommentMapper implements EntityToDtoMapper
             $commentsDto[] = $this->transform($comment);
         }
 
-        return new CommentCollection($commentsDto);
+        return new CommentCollectionDto($commentsDto);
     }
 }

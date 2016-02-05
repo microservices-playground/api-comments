@@ -1,20 +1,21 @@
 <?php
 
-namespace AppBundle\Dto\Outgoing;
+namespace AppBundle\Dto\CollectionDto;
 
-use AppBundle\Dto\OutgoingDtoCollection;
+use AppBundle\Dto\CollectionDto;
+use AppBundle\Dto\Dto\CommentDto;
 
-class CommentCollection implements OutgoingDtoCollection
+class CommentCollectionDto implements CollectionDto
 {
     /**
-     * @var Comment[]
+     * @var CommentDto[]
      */
     private $commentsDto;
 
     public function __construct(array $commentsDto)
     {
         foreach ($commentsDto as $commentDto) {
-            if (!$commentDto instanceof Comment) {
+            if (!$commentDto instanceof CommentDto) {
                 throw new \InvalidArgumentException('Only CommentDTO objects are acceptable in this collection');
             }
         }
@@ -22,7 +23,7 @@ class CommentCollection implements OutgoingDtoCollection
         $this->commentsDto = $commentsDto;
     }
 
-    public function jsonSerialize()
+    public function getCollectionDto(): array
     {
         return $this->commentsDto;
     }

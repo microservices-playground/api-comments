@@ -10,6 +10,10 @@ services:
       - "@comments.mapper.entity_to_dto.comment"
   comments.controller.create:
     class: AppBundle\Controller\Comments\CreateController
+    arguments:
+      - "@comments.response.factory.serialized_json"
+      - "@serializer"
+      - "@validator"
   comments.controller.remove:
     class: AppBundle\Controller\Comments\RemoveController
 
@@ -17,7 +21,7 @@ services:
     class: AppBundle\Repository\CommentRepository
     factory: ["@doctrine.orm.default_entity_manager", getRepository]
     arguments:
-      - AppBundle\Entity\Comment
+      - AppBundle\Entity\CommentDto
   comments.repository.mention:
     class: AppBundle\Repository\MentionRepository
     factory: ["@doctrine.orm.default_entity_manager", getRepository]
@@ -38,3 +42,24 @@ services:
     class: AppBundle\Service\UploadPathResolver\Avatar\AvatarUploadPathResolver
     arguments:
       - "@comments.configuration_fetcher.local"
+
+  comments.response.factory.serialized_json:
+    class: AppBundle\Service\ResponseFactory\SerializedJsonFactory
+    arguments:
+      - "@serializer.encoder.json"
+
+  comments.serializer.yaml_config_loader:
+    class: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+    arguments:
+      - "%kernel.root_dir%/config/serializer.yml"
+  comments.serializer.class_metadata_factory:
+    class: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+    arguments:
+      - "@comments.serializer.yaml_config_loader"
+  comments.serializer.object_normalizer:
+    class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+    arguments:
+      - "@comments.serializer.class_metadata_factory"
+      - "@serializer.name_converter.camel_case_to_snake_case"
+    tags:
+      - { name: serializer.normalizer }

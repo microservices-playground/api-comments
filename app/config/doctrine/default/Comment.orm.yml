@@ -1,4 +1,4 @@
-AppBundle\Entity\Comment:
+AppBundle\Entity\CommentDto:
   type: entity
   table: comment
   repositoryClass: AppBundle\Repository\Doctrine\DoctrineCommentRepository

@@ -1,0 +1,4 @@
+AppBundle\Dto\Dto\CommentDto:
+  properties:
+    content:
+      - NotBlank: ~

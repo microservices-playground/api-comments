@@ -3,7 +3,7 @@
 namespace Tests\AppBundle\Controller\Comments;
 
 use AppBundle\Controller\Comments\ListController;
-use AppBundle\Dto\OutgoingDtoCollection;
+use AppBundle\Dto\CollectionDto;
 use AppBundle\Mapper\EntityToDtoMapper;
 use AppBundle\Repository\CommentRepository;
 use Mockery as m;
@@ -16,7 +16,7 @@ class ListControllerTest extends \PHPUnit_Framework_TestCase
         $commentRepository = m::mock(CommentRepository::class);
         $commentRepository->shouldReceive('getCommentsByPostId')->andReturn([]);
 
-        $outgoingDtoCollection = m::mock(OutgoingDtoCollection::class);
+        $outgoingDtoCollection = m::mock(CollectionDto::class);
         $outgoingDtoCollection->shouldReceive('jsonSerialize')->andReturn([]);
 
         $commentsMapper = m::mock(EntityToDtoMapper::class);

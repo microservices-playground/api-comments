@@ -2,7 +2,6 @@
 
 namespace AppBundle\Dto;
 
-interface IncomingDto
+interface Dto
 {
-
 }

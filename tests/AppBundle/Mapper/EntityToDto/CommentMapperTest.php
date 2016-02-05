@@ -2,13 +2,13 @@
 
 namespace Tests\AppBundle\Mapper\EntityToDto;
 
-use AppBundle\Dto\Outgoing\CommentCollection;
+use AppBundle\Dto\CollectionDto\CommentCollectionDto;
+use AppBundle\Dto\Dto\CommentDto;
 use AppBundle\Entity\Author;
 use AppBundle\Entity\Comment;
 use AppBundle\Mapper\EntityToDto\CommentMapper;
 use AppBundle\Service\UploadPathResolver\UploadPathResolver;
 use Doctrine\Common\Collections\ArrayCollection;
-use AppBundle\Dto\Outgoing\Comment as CommentDto;
 use Mockery as m;
 
 class CommentMapperTest extends \PHPUnit_Framework_TestCase
@@ -70,6 +70,6 @@ class CommentMapperTest extends \PHPUnit_Framework_TestCase
     {
         $commentCollectionDto = $this->commentMapper->transformCollection([$this->comment]);
 
-        $this->assertInstanceOf(CommentCollection::class, $commentCollectionDto);
+        $this->assertInstanceOf(CommentCollectionDto::class, $commentCollectionDto);
     }
 }

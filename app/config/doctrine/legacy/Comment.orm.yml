@@ -1,4 +1,4 @@
-LegacyBundle\Entity\Comment:
+LegacyBundle\Entity\CommentDto:
   type: entity
   table: post_comments
   indexes:
