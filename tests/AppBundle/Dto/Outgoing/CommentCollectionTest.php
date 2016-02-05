@@ -8,7 +8,7 @@ use AppBundle\Dto\CollectionDto;
 class CommentCollectionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Comment
+     * @var CommentDto
      */
     private $comment;
 

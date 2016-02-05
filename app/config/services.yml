@@ -6,12 +6,13 @@ services:
   comments.controller.list:
     class: AppBundle\Controller\Comments\ListController
     arguments:
+      - "@comments.response.factory.dto"
       - "@comments.repository.comment"
       - "@comments.mapper.entity_to_dto.comment"
   comments.controller.create:
     class: AppBundle\Controller\Comments\CreateController
     arguments:
-      - "@comments.response.factory.serialized_json"
+      - "@comments.response.factory.dto"
       - "@serializer"
       - "@validator"
   comments.controller.remove:
@@ -21,7 +22,7 @@ services:
     class: AppBundle\Repository\CommentRepository
     factory: ["@doctrine.orm.default_entity_manager", getRepository]
     arguments:
-      - AppBundle\Entity\CommentDto
+      - AppBundle\Entity\Comment
   comments.repository.mention:
     class: AppBundle\Repository\MentionRepository
     factory: ["@doctrine.orm.default_entity_manager", getRepository]
@@ -44,9 +45,13 @@ services:
       - "@comments.configuration_fetcher.local"
 
   comments.response.factory.serialized_json:
-    class: AppBundle\Service\ResponseFactory\SerializedJsonFactory
+    class: AppBundle\Service\ResponseFactory\SerializedJsonResponseFactory
     arguments:
       - "@serializer.encoder.json"
+  comments.response.factory.dto:
+    class: AppBundle\Service\ResponseFactory\DtoResponseFactory
+    arguments:
+      - "@comments.serializer.object_normalizer"
 
   comments.serializer.yaml_config_loader:
     class: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
