@@ -3,9 +3,7 @@
 namespace AppBundle\Mapper\EntityToDto;
 
 use AppBundle\Dto\Dto\CommentDto;
-use AppBundle\Dto\CollectionDto\CommentCollectionDto;
 use AppBundle\Dto\Dto;
-use AppBundle\Dto\CollectionDto;
 use AppBundle\Entity\Comment;
 use AppBundle\Entity\Mention;
 use AppBundle\Mapper\EntityToDtoMapper;
@@ -48,7 +46,7 @@ class CommentMapper implements EntityToDtoMapper
         return $commentDto;
     }
 
-    public function transformCollection(array $comments): CollectionDto
+    public function transformCollection(array $comments): array
     {
         /** @var Comment[] $comments */
 
@@ -58,6 +56,6 @@ class CommentMapper implements EntityToDtoMapper
             $commentsDto[] = $this->transform($comment);
         }
 
-        return new CommentCollectionDto($commentsDto);
+        return $commentsDto;
     }
 }

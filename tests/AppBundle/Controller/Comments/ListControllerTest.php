@@ -20,11 +20,8 @@ class ListControllerTest extends \PHPUnit_Framework_TestCase
         $commentRepository = m::mock(CommentRepository::class);
         $commentRepository->shouldReceive('getCommentsByPostId')->andReturn([]);
 
-        $outgoingDtoCollection = m::mock(CollectionDto::class);
-        $outgoingDtoCollection->shouldReceive('jsonSerialize')->andReturn([]);
-
         $commentsMapper = m::mock(EntityToDtoMapper::class);
-        $commentsMapper->shouldReceive('transformCollection')->andReturn($outgoingDtoCollection);
+        $commentsMapper->shouldReceive('transformCollection')->andReturn([]);
 
         $controller = new ListController($responseFactory, $commentRepository, $commentsMapper);
 

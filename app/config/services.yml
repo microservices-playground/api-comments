@@ -51,7 +51,7 @@ services:
   comments.response.factory.dto:
     class: AppBundle\Service\ResponseFactory\DtoResponseFactory
     arguments:
-      - "@comments.serializer.object_normalizer"
+      - "@serializer"
 
   comments.serializer.yaml_config_loader:
     class: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
