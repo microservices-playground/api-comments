@@ -45,6 +45,7 @@ class Comment implements Entity
     public function __construct()
     {
         $this->mentions = new ArrayCollection();
+        $this->active = true;
     }
 
     public function setId(int $id): Comment

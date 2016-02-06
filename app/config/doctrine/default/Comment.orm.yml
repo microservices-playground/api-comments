@@ -44,3 +44,4 @@ Foodlove\AppBundle\Entity\Comment:
         inverseJoinColumns:
           mention_id:
             referencedColumnName: id
+  lifecycleCallbacks: {}

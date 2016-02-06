@@ -2,3 +2,5 @@ Foodlove\AppBundle\Dto\Dto\CommentDto:
   properties:
     content:
       - NotBlank: ~
+    postId:
+      - NotBlank: ~

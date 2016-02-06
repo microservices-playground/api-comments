@@ -21,8 +21,10 @@ class DtoResponseFactory implements ResponseFactory
 
     public function makeResponse($data = null, int $httpStatus = Response::HTTP_OK, array $headers = []): Response
     {
-        $data = $this->normalizer->normalize($data, JsonEncoder::FORMAT);
+        $normalized = $this->normalizer->normalize($data, JsonEncoder::FORMAT, [
+            'groups' => ['expose']
+        ]);
 
-        return new JsonResponse($data, $httpStatus, $headers);
+        return new JsonResponse($normalized, $httpStatus, $headers);
     }
 }

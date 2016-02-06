@@ -15,6 +15,9 @@ services:
       - "@comments.response.factory.dto"
       - "@serializer"
       - "@validator"
+      - "@comments.mapper.dto_to_entity.comment"
+      - "@comments.repository.comment"
+      - "@comments.mapper.entity_to_dto.comment"
   comments.controller.remove:
     class: Foodlove\AppBundle\Controller\Comments\RemoveController
 
@@ -28,11 +31,21 @@ services:
     factory: ["@doctrine.orm.default_entity_manager", getRepository]
     arguments:
       - Foodlove\AppBundle\Entity\Mention
+  comments.repository.author:
+    class: Foodlove\AppBundle\Repository\AuthorRepository
+    factory: ["@doctrine.orm.default_entity_manager", getRepository]
+    arguments:
+      - Foodlove\AppBundle\Entity\Author
 
   comments.mapper.entity_to_dto.comment:
     class: Foodlove\AppBundle\Mapper\EntityToDto\CommentMapper
     arguments:
       - "@comments.upload_path_resolver.avatar"
+
+  comments.mapper.dto_to_entity.comment:
+    class: Foodlove\AppBundle\Mapper\DtoToEntity\CommentMapper
+    arguments:
+      - "@comments.repository.author"
 
   comments.configuration_fetcher.local:
     class: Foodlove\AppBundle\Service\ConfigurationFetcher\LocalConfigurationFetcher

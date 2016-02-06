@@ -1,6 +1,7 @@
 Foodlove\AppBundle\Entity\Author:
   type: entity
   table: author
+  repositoryClass: Foodlove\AppBundle\Repository\Doctrine\DoctrineAuthorRepository
   uniqueConstraints:
     - columns: [user_id]
   id:
