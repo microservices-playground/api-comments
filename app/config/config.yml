@@ -17,8 +17,11 @@ framework:
     form:
         enabled: false
     #csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:
+        enabled: true
+        enable_annotations: false
     serializer:
+        enabled: true
         enable_annotations: false
     #templating:
         #engines: ['twig']

@@ -19,7 +19,7 @@ services:
     arguments:
       - "@comments.response.factory.dto"
       - "@serializer"
-      - "@validator"
+      - "@comments.validator"
       - "@comments.mapper.dto_to_entity.comment"
       - "@comments.repository.comment"
       - "@comments.mapper.entity_to_dto.comment"
@@ -82,3 +82,15 @@ services:
       - "@serializer.name_converter.camel_case_to_snake_case"
     tags:
       - { name: serializer.normalizer }
+
+  comments.validator:
+    class: Symfony\Component\Validator\Validator\ValidatorInterface
+    factory: ["@comments.validator.builder", getValidator]
+  comments.validator.builder:
+    class: Symfony\Component\Validator\ValidatorBuilderInterface
+    factory: [Symfony\Component\Validator\Validation, createValidatorBuilder]
+    calls:
+      - [setConstraintValidatorFactory, ["@validator.validator_factory"]]
+      - [setTranslator, ["@translator"]]
+      - [setTranslationDomain, ["%validator.translation_domain%"]]
+      - [addYamlMapping, ["%kernel.root_dir%/config/validation.yml"]]
