@@ -3,6 +3,11 @@ parameters:
   avatar.upload_path: "/uploads/avatars"
 
 services:
+  comments.listener.timestampable:
+    class: Gedmo\Timestampable\TimestampableListener
+    tags:
+      - { name: doctrine.event_subscriber, connection: default }
+
   comments.controller.list:
     class: Foodlove\AppBundle\Controller\Comments\ListController
     arguments:
