@@ -25,6 +25,8 @@ services:
       - "@comments.mapper.entity_to_dto.comment"
   comments.controller.remove:
     class: Foodlove\AppBundle\Controller\Comments\RemoveController
+    arguments:
+      - "@comments.repository.comment"
 
   comments.repository.comment:
     class: Foodlove\AppBundle\Repository\CommentRepository
@@ -87,10 +89,6 @@ services:
     class: Symfony\Component\Validator\Validator\ValidatorInterface
     factory: ["@comments.validator.builder", getValidator]
   comments.validator.builder:
-    class: Symfony\Component\Validator\ValidatorBuilderInterface
-    factory: [Symfony\Component\Validator\Validation, createValidatorBuilder]
+    parent: validator.builder
     calls:
-      - [setConstraintValidatorFactory, ["@validator.validator_factory"]]
-      - [setTranslator, ["@translator"]]
-      - [setTranslationDomain, ["%validator.translation_domain%"]]
       - [addYamlMapping, ["%kernel.root_dir%/config/validation.yml"]]

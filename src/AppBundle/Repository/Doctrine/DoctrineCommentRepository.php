@@ -14,6 +14,17 @@ class DoctrineCommentRepository extends EntityRepository implements CommentRepos
         $this->getEntityManager()->flush();
     }
 
+    public function remove(Entity $comment)
+    {
+        $this->getEntityManager()->remove($comment);
+        $this->getEntityManager()->flush();
+    }
+
+    public function getById(int $id)
+    {
+        return $this->find($id);
+    }
+
     public function getCommentsByPostId(int $postId): array
     {
         $queryBuilder = $this->createQueryBuilder('c');
