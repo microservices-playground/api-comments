@@ -89,7 +89,7 @@ nelmio_cors:
         allow_headers: ["Content-Type"]
         max_age: 0
     paths:
-        '^/posts/[0-9]+/comments':
-            allow_methods: ["GET", "POST"]
         '^/posts/[0-9]+/comments/[0-9]+':
             allow_methods: ["DELETE"]
+        '^/posts/[0-9]+/comments':
+            allow_methods: ["GET", "POST"]

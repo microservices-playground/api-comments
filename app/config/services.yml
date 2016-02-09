@@ -19,10 +19,10 @@ services:
     arguments:
       - "@comments.response.factory.dto"
       - "@serializer"
-      - "@comments.validator"
       - "@comments.mapper.dto_to_entity.comment"
       - "@comments.repository.comment"
       - "@comments.mapper.entity_to_dto.comment"
+      - "@comments.validator.handler.create_comment"
   comments.controller.remove:
     class: Foodlove\AppBundle\Controller\Comments\RemoveController
     arguments:
@@ -92,3 +92,7 @@ services:
     parent: validator.builder
     calls:
       - [addYamlMapping, ["%kernel.root_dir%/config/validation.yml"]]
+  comments.validator.handler.create_comment:
+    class: Foodlove\AppBundle\Service\Validator\Handler\CreateCommentHandler
+    arguments:
+      - "@comments.validator"

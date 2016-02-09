@@ -2,16 +2,17 @@
 
 namespace Foodlove\AppBundle\Controller\Comments;
 
+use Foodlove\AppBundle\Exception\ValidationError;
+use Foodlove\AppBundle\Service\Validator\ValidationHandler;
+use Foodlove\AppBundle\Response\ValidationErrorResponse;
 use Foodlove\AppBundle\Dto\Dto\CommentDto;
 use Foodlove\AppBundle\Mapper\DtoToEntityMapper;
 use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
 use Foodlove\AppBundle\Repository\CommentRepository;
 use Foodlove\AppBundle\Service\ResponseFactory\ResponseFactory;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CreateController
 {
@@ -24,11 +25,6 @@ class CreateController
      * @var SerializerInterface
      */
     private $serializer;
-
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
 
     /**
      * @var DtoToEntityMapper
@@ -45,20 +41,25 @@ class CreateController
      */
     private $entityToDtoMapper;
 
+    /**
+     * @var ValidationHandler
+     */
+    private $validationHandler;
+
     public function __construct(
         ResponseFactory $responseFactory,
         SerializerInterface $serializer,
-        ValidatorInterface $validator,
         DtoToEntityMapper $dtoToEntityMapper,
         CommentRepository $commentRepository,
-        EntityToDtoMapper $entityToDtoMapper
+        EntityToDtoMapper $entityToDtoMapper,
+        ValidationHandler $validationHandler
     ) {
         $this->responseFactory = $responseFactory;
         $this->serializer = $serializer;
-        $this->validator = $validator;
         $this->dtoToEntityMapper = $dtoToEntityMapper;
         $this->commentRepository = $commentRepository;
         $this->entityToDtoMapper = $entityToDtoMapper;
+        $this->validationHandler = $validationHandler;
     }
 
     public function createAction(Request $request, int $postId): Response
@@ -69,16 +70,16 @@ class CreateController
         ]);
         $commentDto->postId = $postId;
 
-        $errors = $this->validator->validate($commentDto);
-
-        if ($errors->count() === 0) {
-            $comment = $this->dtoToEntityMapper->transform($commentDto);
-            $this->commentRepository->add($comment);
-            $commentDto = $this->entityToDtoMapper->transform($comment);
-
-            return $this->responseFactory->makeResponse($commentDto, Response::HTTP_CREATED);
+        try {
+            $this->validationHandler->handleValidation($commentDto);
+        } catch (ValidationError $e) {
+            return new ValidationErrorResponse($e);
         }
 
-        return new JsonResponse(['przypał'], Response::HTTP_BAD_REQUEST);
+        $comment = $this->dtoToEntityMapper->transform($commentDto);
+        $this->commentRepository->add($comment);
+        $commentDto = $this->entityToDtoMapper->transform($comment);
+
+        return $this->responseFactory->makeResponse($commentDto, Response::HTTP_CREATED);
     }
 }

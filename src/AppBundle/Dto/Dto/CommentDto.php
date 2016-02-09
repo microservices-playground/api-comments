@@ -2,9 +2,10 @@
 
 namespace Foodlove\AppBundle\Dto\Dto;
 
+use Foodlove\AppBundle\Service\Validator\Validatable;
 use Foodlove\AppBundle\Dto\Dto;
 
-class CommentDto implements Dto
+class CommentDto implements Dto, Validatable
 {
     /**
      * @var int

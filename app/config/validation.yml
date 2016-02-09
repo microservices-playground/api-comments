@@ -2,5 +2,7 @@ Foodlove\AppBundle\Dto\Dto\CommentDto:
   properties:
     content:
       - NotBlank: ~
+      - Length: {max: 4}
+      - Length: {min: 10}
     postId:
       - NotBlank: ~
