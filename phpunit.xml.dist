@@ -11,6 +11,9 @@
     <filter>
         <whitelist>
             <directory suffix=".php">src/</directory>
+            <exclude>
+                <directory>src/LegacyBundle/</directory>
+            </exclude>
         </whitelist>
     </filter>
     <listeners>
