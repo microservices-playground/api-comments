@@ -2,13 +2,9 @@
 
 namespace Foodlove\AppBundle\Controller\Comments;
 
-use Foodlove\AppBundle\Exception\ValidationError;
+use Foodlove\AppBundle\Service\CrudOperations\CreateHandler;
 use Foodlove\AppBundle\Service\Validator\ValidationHandler;
-use Foodlove\AppBundle\Response\ValidationErrorResponse;
 use Foodlove\AppBundle\Dto\Dto\CommentDto;
-use Foodlove\AppBundle\Mapper\DtoToEntityMapper;
-use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
-use Foodlove\AppBundle\Repository\CommentRepository;
 use Foodlove\AppBundle\Service\ResponseFactory\ResponseFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,39 +23,25 @@ class CreateController
     private $serializer;
 
     /**
-     * @var DtoToEntityMapper
-     */
-    private $dtoToEntityMapper;
-
-    /**
-     * @var CommentRepository
-     */
-    private $commentRepository;
-
-    /**
-     * @var EntityToDtoMapper
-     */
-    private $entityToDtoMapper;
-
-    /**
      * @var ValidationHandler
      */
     private $validationHandler;
 
+    /**
+     * @var CreateHandler
+     */
+    private $createHandler;
+
     public function __construct(
         ResponseFactory $responseFactory,
         SerializerInterface $serializer,
-        DtoToEntityMapper $dtoToEntityMapper,
-        CommentRepository $commentRepository,
-        EntityToDtoMapper $entityToDtoMapper,
-        ValidationHandler $validationHandler
+        ValidationHandler $validationHandler,
+        CreateHandler $createHandler
     ) {
         $this->responseFactory = $responseFactory;
         $this->serializer = $serializer;
-        $this->dtoToEntityMapper = $dtoToEntityMapper;
-        $this->commentRepository = $commentRepository;
-        $this->entityToDtoMapper = $entityToDtoMapper;
         $this->validationHandler = $validationHandler;
+        $this->createHandler = $createHandler;
     }
 
     public function createAction(Request $request, int $postId): Response
@@ -70,15 +52,8 @@ class CreateController
         ]);
         $commentDto->postId = $postId;
 
-        try {
-            $this->validationHandler->handleValidation($commentDto);
-        } catch (ValidationError $e) {
-            return new ValidationErrorResponse($e);
-        }
-
-        $comment = $this->dtoToEntityMapper->transform($commentDto);
-        $this->commentRepository->add($comment);
-        $commentDto = $this->entityToDtoMapper->transform($comment);
+        $this->validationHandler->handleValidation($commentDto);
+        $commentDto = $this->createHandler->create($commentDto);
 
         return $this->responseFactory->makeResponse($commentDto, Response::HTTP_CREATED);
     }

@@ -3,6 +3,10 @@ parameters:
   avatar.upload_path: "/uploads/avatars"
 
 services:
+  comments.listener.exception:
+    class: Foodlove\AppBundle\Service\ExceptionHandler\ExceptionListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
   comments.listener.timestampable:
     class: Gedmo\Timestampable\TimestampableListener
     tags:
@@ -19,14 +23,19 @@ services:
     arguments:
       - "@comments.response.factory.dto"
       - "@serializer"
-      - "@comments.mapper.dto_to_entity.comment"
-      - "@comments.repository.comment"
-      - "@comments.mapper.entity_to_dto.comment"
       - "@comments.validator.handler.create_comment"
+      - "@comments.crud_operations.comment.create"
   comments.controller.remove:
     class: Foodlove\AppBundle\Controller\Comments\RemoveController
     arguments:
       - "@comments.repository.comment"
+
+  comments.crud_operations.comment.create:
+    class: Foodlove\AppBundle\Service\CrudOperations\Comment\CreateCommentHandler
+    arguments:
+      - "@comments.mapper.dto_to_entity.comment"
+      - "@comments.repository.comment"
+      - "@comments.mapper.entity_to_dto.comment"
 
   comments.repository.comment:
     class: Foodlove\AppBundle\Repository\CommentRepository
