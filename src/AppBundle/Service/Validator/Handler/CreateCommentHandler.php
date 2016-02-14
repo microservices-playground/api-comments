@@ -25,7 +25,7 @@ class CreateCommentHandler implements ValidationHandler
      * @throws ValidationError
      * @return void
      */
-    public function handleValidation(Validatable $comment)
+    public function validate(Validatable $comment)
     {
         $errors = $this->validator->validate($comment);
 

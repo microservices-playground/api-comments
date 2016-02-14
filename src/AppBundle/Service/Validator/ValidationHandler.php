@@ -12,5 +12,5 @@ interface ValidationHandler
      * @throws ValidationError
      * @return void
      */
-    public function handleValidation(Validatable $object);
+    public function validate(Validatable $object);
 }

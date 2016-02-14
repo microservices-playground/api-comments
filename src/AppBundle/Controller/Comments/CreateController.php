@@ -18,11 +18,6 @@ class CreateController
     private $dtoFactory;
 
     /**
-     * @var ResponseFactory
-     */
-    private $responseFactory;
-
-    /**
      * @var ValidationHandler
      */
     private $validationHandler;
@@ -32,23 +27,28 @@ class CreateController
      */
     private $createHandler;
 
+    /**
+     * @var ResponseFactory
+     */
+    private $responseFactory;
+
     public function __construct(
         DtoFactory $dtoFactory,
-        ResponseFactory $responseFactory,
         ValidationHandler $validationHandler,
-        CreateHandler $createHandler
+        CreateHandler $createHandler,
+        ResponseFactory $responseFactory
     ) {
-        $this->responseFactory = $responseFactory;
+        $this->dtoFactory = $dtoFactory;
         $this->validationHandler = $validationHandler;
         $this->createHandler = $createHandler;
-        $this->dtoFactory = $dtoFactory;
+        $this->responseFactory = $responseFactory;
     }
 
     public function createAction(Request $request): Response
     {
         /** @var CommentDto $commentDto */
         $commentDto = $this->dtoFactory->makeDto($request);
-        $this->validationHandler->handleValidation($commentDto);
+        $this->validationHandler->validate($commentDto);
         $commentDto = $this->createHandler->create($commentDto);
 
         return $this->responseFactory->makeResponse($commentDto, Response::HTTP_CREATED);

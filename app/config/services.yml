@@ -22,9 +22,9 @@ services:
     class: Foodlove\AppBundle\Controller\Comments\CreateController
     arguments:
       - "@comments.dto.factory.comment"
-      - "@comments.response.factory.dto"
       - "@comments.validator.handler.create_comment"
       - "@comments.crud_operations.comment.create"
+      - "@comments.response.factory.dto"
   comments.controller.remove:
     class: Foodlove\AppBundle\Controller\Comments\RemoveController
     arguments:
