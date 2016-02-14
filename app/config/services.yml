@@ -28,7 +28,8 @@ services:
   comments.controller.remove:
     class: Foodlove\AppBundle\Controller\Comments\RemoveController
     arguments:
-      - "@comments.repository.comment"
+      - "@comments.crud_operations.comment.delete"
+      - "@comments.response.factory.no_content"
 
   comments.dto.factory.comment:
     class: Foodlove\AppBundle\Service\DtoFactory\CommentDtoFactory
@@ -41,6 +42,10 @@ services:
       - "@comments.mapper.dto_to_entity.comment"
       - "@comments.repository.comment"
       - "@comments.mapper.entity_to_dto.comment"
+  comments.crud_operations.comment.delete:
+    class: Foodlove\AppBundle\Service\CrudOperations\Comment\DeleteCommentHandler
+    arguments:
+      - "@comments.repository.comment"
 
   comments.repository.comment:
     class: Foodlove\AppBundle\Repository\CommentRepository
@@ -82,6 +87,8 @@ services:
     class: Foodlove\AppBundle\Service\ResponseFactory\DtoResponseFactory
     arguments:
       - "@serializer"
+  comments.response.factory.no_content:
+    class: Foodlove\AppBundle\Service\ResponseFactory\NoContentResponseFactory
 
   comments.serializer.yaml_config_loader:
     class: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader

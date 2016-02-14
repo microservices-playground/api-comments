@@ -2,31 +2,32 @@
 
 namespace Foodlove\AppBundle\Controller\Comments;
 
-use Foodlove\AppBundle\Repository\CommentRepository;
+use Foodlove\AppBundle\Service\CrudOperations\DeleteHandler;
+use Foodlove\AppBundle\Service\ResponseFactory\ResponseFactory;
 use Symfony\Component\HttpFoundation\Response;
 
 class RemoveController
 {
     /**
-     * @var CommentRepository
+     * @var DeleteHandler
      */
-    private $commentRepository;
+    private $deleteHandler;
 
-    public function __construct(CommentRepository $commentRepository)
+    /**
+     * @var ResponseFactory
+     */
+    private $responseFactory;
+
+    public function __construct(DeleteHandler $deleteHandler, ResponseFactory $responseFactory)
     {
-        $this->commentRepository = $commentRepository;
+        $this->deleteHandler = $deleteHandler;
+        $this->responseFactory = $responseFactory;
     }
 
-    public function removeAction(int $postId, int $commentId): Response
+    public function removeAction(int $commentId): Response
     {
-        $comment = $this->commentRepository->getById($commentId);
+        $this->deleteHandler->delete($commentId);
 
-        if (null === $comment) {
-            return new Response(null, Response::HTTP_NOT_FOUND);
-        }
-
-        $this->commentRepository->remove($comment);
-
-        return new Response(null, Response::HTTP_NO_CONTENT);
+        return $this->responseFactory->makeResponse();
     }
 }

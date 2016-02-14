@@ -6,5 +6,5 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ResponseFactory
 {
-    public function makeResponse($data, int $httpStatus = Response::HTTP_OK, array $headers = []): Response;
+    public function makeResponse($data = null, int $httpStatus = Response::HTTP_OK, array $headers = []): Response;
 }
