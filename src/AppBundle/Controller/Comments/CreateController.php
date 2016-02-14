@@ -3,6 +3,7 @@
 namespace Foodlove\AppBundle\Controller\Comments;
 
 use Foodlove\AppBundle\Service\CrudOperations\CreateHandler;
+use Foodlove\AppBundle\Service\DtoFactory\DtoFactory;
 use Foodlove\AppBundle\Service\Validator\ValidationHandler;
 use Foodlove\AppBundle\Dto\Dto\CommentDto;
 use Foodlove\AppBundle\Service\ResponseFactory\ResponseFactory;
@@ -13,14 +14,14 @@ use Symfony\Component\Serializer\SerializerInterface;
 class CreateController
 {
     /**
+     * @var DtoFactory
+     */
+    private $dtoFactory;
+
+    /**
      * @var ResponseFactory
      */
     private $responseFactory;
-
-    /**
-     * @var SerializerInterface
-     */
-    private $serializer;
 
     /**
      * @var ValidationHandler
@@ -33,25 +34,21 @@ class CreateController
     private $createHandler;
 
     public function __construct(
+        DtoFactory $dtoFactory,
         ResponseFactory $responseFactory,
-        SerializerInterface $serializer,
         ValidationHandler $validationHandler,
         CreateHandler $createHandler
     ) {
         $this->responseFactory = $responseFactory;
-        $this->serializer = $serializer;
         $this->validationHandler = $validationHandler;
         $this->createHandler = $createHandler;
+        $this->dtoFactory = $dtoFactory;
     }
 
-    public function createAction(Request $request, int $postId): Response
+    public function createAction(Request $request): Response
     {
         /** @var CommentDto $commentDto */
-        $commentDto = $this->serializer->deserialize($request->getContent(), CommentDto::class, 'json', [
-            'groups' => ['create']
-        ]);
-        $commentDto->postId = $postId;
-
+        $commentDto = $this->dtoFactory->makeDto($request);
         $this->validationHandler->handleValidation($commentDto);
         $commentDto = $this->createHandler->create($commentDto);
 

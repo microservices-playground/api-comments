@@ -21,14 +21,19 @@ services:
   comments.controller.create:
     class: Foodlove\AppBundle\Controller\Comments\CreateController
     arguments:
+      - "@comments.dto.factory.comment"
       - "@comments.response.factory.dto"
-      - "@serializer"
       - "@comments.validator.handler.create_comment"
       - "@comments.crud_operations.comment.create"
   comments.controller.remove:
     class: Foodlove\AppBundle\Controller\Comments\RemoveController
     arguments:
       - "@comments.repository.comment"
+
+  comments.dto.factory.comment:
+    class: Foodlove\AppBundle\Service\DtoFactory\CommentDtoFactory
+    arguments:
+      - "@serializer"
 
   comments.crud_operations.comment.create:
     class: Foodlove\AppBundle\Service\CrudOperations\Comment\CreateCommentHandler
