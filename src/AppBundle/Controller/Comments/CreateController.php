@@ -9,7 +9,6 @@ use Foodlove\AppBundle\Dto\Dto\CommentDto;
 use Foodlove\AppBundle\Service\ResponseFactory\ResponseFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class CreateController
 {
