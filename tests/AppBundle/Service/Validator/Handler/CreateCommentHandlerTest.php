@@ -40,4 +40,16 @@ class CreateCommentHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->validationHandler->validate($comment);
     }
+
+    public function testValidateDoesNotThrowExceptionIfThereAreNoErrors()
+    {
+        $errors = m::mock(ConstraintViolationListInterface::class);
+        $errors->shouldReceive('count')->andReturn(0);
+
+        $comment = m::mock(Validatable::class);
+
+        $this->validator->shouldReceive('validate')->once()->andReturn($errors);
+
+        $this->validationHandler->validate($comment);
+    }
 }
