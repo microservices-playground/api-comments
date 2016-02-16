@@ -119,14 +119,15 @@ services:
     arguments:
       - "@comments.validator"
 
+
   comments.mentions.resolver:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsResolver\TextToEntitiesMentionsResolver
     arguments:
-      - "@comments.mentions.parser.at_cahracter"
+      - "@comments.mentions.parser.at_character"
       - "@comments.mentions.fetcher.local_database"
       - "@comments.mentions.mapper.confirmed_mentions_dto_to_mentions_entity"
 
-  comments.mentions.parser.at_cahracter:
+  comments.mentions.parser.at_character:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsParser\AtCharacterMentionsParser
 
   comments.mentions.fetcher.local_database:
