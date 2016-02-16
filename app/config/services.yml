@@ -72,6 +72,7 @@ services:
     class: Foodlove\AppBundle\Mapper\DtoToEntity\CommentMapper
     arguments:
       - "@comments.repository.author"
+      - "@comments.mentions.resolver"
 
   comments.configuration_fetcher.local:
     class: Foodlove\AppBundle\Service\ConfigurationFetcher\LocalConfigurationFetcher
