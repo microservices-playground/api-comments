@@ -8,6 +8,8 @@ use Foodlove\AppBundle\Entity\Comment;
 use Foodlove\AppBundle\Entity\Entity;
 use Foodlove\AppBundle\Mapper\DtoToEntityMapper;
 use Foodlove\AppBundle\Repository\AuthorRepository;
+use Foodlove\AppBundle\Service\MentionsHandler\MentionsParser;
+use Foodlove\AppBundle\Service\MentionsHandler\MentionsResolver;
 
 class CommentMapper implements DtoToEntityMapper
 {
@@ -18,9 +20,15 @@ class CommentMapper implements DtoToEntityMapper
      */
     private $authorRepository;
 
-    public function __construct(AuthorRepository $authorRepository)
+    /**
+     * @var MentionsResolver
+     */
+    private $mentionsResolver;
+
+    public function __construct(AuthorRepository $authorRepository, MentionsResolver $mentionsResolver)
     {
         $this->authorRepository = $authorRepository;
+        $this->mentionsResolver = $mentionsResolver;
     }
 
     public function transform(Dto $dto): Entity
@@ -29,9 +37,17 @@ class CommentMapper implements DtoToEntityMapper
             throw new \InvalidArgumentException('You need to pass CommentDto object');
         }
 
-        return (new Comment())
+        $mentions = $this->mentionsResolver->getMentions($dto->content);
+
+        $comment = (new Comment())
             ->setContent($dto->content)
             ->setPostId($dto->postId)
             ->setAuthor($this->authorRepository->getById(self::HARDCODED_AUTHOR_ID));
+
+        foreach ($mentions as $mention) {
+            $comment->addMention($mention);
+        }
+
+        return $comment;
     }
 }
