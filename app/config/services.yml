@@ -107,6 +107,7 @@ services:
     tags:
       - { name: serializer.normalizer }
 
+
   comments.validator:
     class: Symfony\Component\Validator\Validator\ValidatorInterface
     factory: ["@comments.validator.builder", getValidator]
@@ -126,12 +127,9 @@ services:
       - "@comments.mentions.parser.at_character"
       - "@comments.mentions.fetcher.local_database"
       - "@comments.mentions.mapper.confirmed_mentions_dto_to_mentions_entity"
-
   comments.mentions.parser.at_character:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsParser\AtCharacterMentionsParser
-
   comments.mentions.fetcher.local_database:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsFetcher\LocalDatabaseMentionsFetcher
-
   comments.mentions.mapper.confirmed_mentions_dto_to_mentions_entity:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsMapper\ConfirmedMentionsDtoToMentionsEntityMapper
