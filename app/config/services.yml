@@ -131,5 +131,9 @@ services:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsParser\AtCharacterMentionsParser
   comments.mentions.fetcher.local_database:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsFetcher\LocalDatabaseMentionsFetcher
+    arguments:
+      - "@comments.repository.mention"
   comments.mentions.mapper.confirmed_mentions_dto_to_mentions_entity:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsMapper\ConfirmedMentionsDtoToMentionsEntityMapper
+    arguments:
+      - "@comments.repository.mention"
