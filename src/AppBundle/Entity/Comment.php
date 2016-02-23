@@ -138,4 +138,14 @@ class Comment implements Entity
     {
         return $this->mentions;
     }
+
+    public function getAuthorsUsername(): string
+    {
+        return $this->author->getUsername();
+    }
+
+    public function getAuthorsAvatarFilename(): string
+    {
+        return $this->author->getAvatarFilename();
+    }
 }

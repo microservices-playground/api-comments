@@ -3,6 +3,7 @@
 namespace Foodlove\AppBundle\Service\CrudOperations\Comment;
 
 use Foodlove\AppBundle\Dto\Dto;
+use Foodlove\AppBundle\Entity\Comment;
 use Foodlove\AppBundle\Mapper\DtoToEntityMapper;
 use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
 use Foodlove\AppBundle\Repository\CommentRepository;
@@ -46,9 +47,14 @@ class CreateCommentHandler implements CreateHandler
 
     public function create(Dto $commentDto): Dto
     {
+        /** @var Comment $comment */
         $comment = $this->dtoToEntityMapper->transform($commentDto);
         $this->commentRepository->add($comment);
-        $this->eventDispatcher->dispatch(new CommentHasBeenAdded($commentDto));
+        $this->eventDispatcher->dispatch(new CommentHasBeenAdded(
+            $comment->getAuthorsUsername(),
+            $comment->getAuthorsAvatarFilename(),
+            $comment->getPostId()
+        ));
 
         return $this->entityToDtoMapper->transform($comment);
     }
