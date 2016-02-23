@@ -2,8 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: services.yml }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: pl
 
@@ -38,7 +36,6 @@ framework:
     http_method_override: true
     assets: ~
 
-# Doctrine Configuration
 doctrine:
     dbal:
         default_connection: default
@@ -84,6 +81,7 @@ doctrine:
                         alias:     LegacyBundle
                         dir:       %kernel.root_dir%/config/doctrine/legacy
                         is_bundle: false
+
 nelmio_cors:
     defaults:
         allow_origin: ["*"]
@@ -94,3 +92,21 @@ nelmio_cors:
             allow_methods: ["DELETE"]
         '^/posts/[0-9]+/comments':
             allow_methods: ["GET", "POST"]
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     "localhost"
+            port:     5672
+            user:     "guest"
+            password: "guest"
+            vhost:    "/"
+            lazy:     false
+            connection_timeout: 2
+            read_write_timeout: 3
+            keepalive: false
+            heartbeat: 0
+    producers:
+        activities:
+            connection:       default
+            exchange_options: { name: "activities", type: direct }

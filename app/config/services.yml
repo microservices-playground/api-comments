@@ -41,6 +41,7 @@ services:
     arguments:
       - "@comments.mapper.dto_to_entity.comment"
       - "@comments.repository.comment"
+      - "@comments.event_dispatcher.rabbit_mq"
       - "@comments.mapper.entity_to_dto.comment"
   comments.crud_operations.comment.delete:
     class: Foodlove\AppBundle\Service\CrudOperations\Comment\DeleteCommentHandler
@@ -107,7 +108,6 @@ services:
     tags:
       - { name: serializer.normalizer }
 
-
   comments.validator:
     class: Symfony\Component\Validator\Validator\ValidatorInterface
     factory: ["@comments.validator.builder", getValidator]
@@ -119,7 +119,6 @@ services:
     class: Foodlove\AppBundle\Service\Validator\Handler\CreateCommentHandler
     arguments:
       - "@comments.validator"
-
 
   comments.mentions.resolver:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsResolver\TextToEntitiesMentionsResolver
@@ -137,3 +136,8 @@ services:
     class: Foodlove\AppBundle\Service\MentionsHandler\MentionsMapper\ConfirmedMentionsDtoToMentionsEntityMapper
     arguments:
       - "@comments.repository.mention"
+
+  comments.event_dispatcher.rabbit_mq:
+    class: Foodlove\AppBundle\Service\EventsHandler\EventDispatcher\RabbitMqEventDispatcher
+    arguments:
+      - "@old_sound_rabbit_mq.activities_producer"

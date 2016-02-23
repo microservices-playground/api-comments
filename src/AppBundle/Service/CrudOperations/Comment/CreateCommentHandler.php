@@ -7,6 +7,8 @@ use Foodlove\AppBundle\Mapper\DtoToEntityMapper;
 use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
 use Foodlove\AppBundle\Repository\CommentRepository;
 use Foodlove\AppBundle\Service\CrudOperations\CreateHandler;
+use Foodlove\AppBundle\Service\EventsHandler\Event\CommentHasBeenAdded;
+use Foodlove\AppBundle\Service\EventsHandler\EventDispatcher;
 
 class CreateCommentHandler implements CreateHandler
 {
@@ -21,6 +23,11 @@ class CreateCommentHandler implements CreateHandler
     private $commentRepository;
 
     /**
+     * @var EventDispatcher
+     */
+    private $eventDispatcher;
+
+    /**
      * @var EntityToDtoMapper
      */
     private $entityToDtoMapper;
@@ -28,10 +35,12 @@ class CreateCommentHandler implements CreateHandler
     public function __construct(
         DtoToEntityMapper $dtoToEntityMapper,
         CommentRepository $commentRepository,
+        EventDispatcher $eventDispatcher,
         EntityToDtoMapper $entityToDtoMapper
     ) {
         $this->dtoToEntityMapper = $dtoToEntityMapper;
         $this->commentRepository = $commentRepository;
+        $this->eventDispatcher = $eventDispatcher;
         $this->entityToDtoMapper = $entityToDtoMapper;
     }
 
@@ -39,6 +48,7 @@ class CreateCommentHandler implements CreateHandler
     {
         $comment = $this->dtoToEntityMapper->transform($commentDto);
         $this->commentRepository->add($comment);
+        $this->eventDispatcher->dispatch(new CommentHasBeenAdded($commentDto));
 
         return $this->entityToDtoMapper->transform($comment);
     }
