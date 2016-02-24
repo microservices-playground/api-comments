@@ -3,10 +3,10 @@
 namespace Foodlove\AppBundle\Service\EventsHandler\EventDispatcher;
 
 use Foodlove\AppBundle\Service\EventsHandler\Event;
-use Foodlove\AppBundle\Service\EventsHandler\EventDispatcher;
+use Foodlove\AppBundle\Service\EventsHandler\SystemWideEventDispatcher;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 
-class RabbitMqEventDispatcher implements EventDispatcher
+class RabbitMqSystemWideEventDispatcher implements SystemWideEventDispatcher
 {
     /**
      * @var ProducerInterface

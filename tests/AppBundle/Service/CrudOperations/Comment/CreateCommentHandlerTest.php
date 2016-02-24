@@ -7,7 +7,7 @@ use Foodlove\AppBundle\Entity\Comment;
 use Foodlove\AppBundle\Mapper\DtoToEntityMapper;
 use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
 use Foodlove\AppBundle\Repository\CommentRepository;
-use Foodlove\AppBundle\Service\EventsHandler\EventDispatcher;
+use Foodlove\AppBundle\Service\EventsHandler\SystemWideEventDispatcher;
 use Mockery as m;
 
 class CreateCommentHandlerTest extends \PHPUnit_Framework_TestCase
@@ -28,7 +28,7 @@ class CreateCommentHandlerTest extends \PHPUnit_Framework_TestCase
     private $commentRepository;
 
     /**
-     * @var EventDispatcher
+     * @var SystemWideEventDispatcher
      */
     private $eventDispatcher;
 
@@ -51,7 +51,7 @@ class CreateCommentHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $this->dtoToEntityMapper = m::mock(DtoToEntityMapper::class);
         $this->commentRepository = m::mock(CommentRepository::class);
-        $this->eventDispatcher = m::mock(EventDispatcher::class);
+        $this->eventDispatcher = m::mock(SystemWideEventDispatcher::class);
         $this->entityToDtoMapper = m::mock(EntityToDtoMapper::class);
 
         $this->commentDto = m::mock(CommentDto::class);

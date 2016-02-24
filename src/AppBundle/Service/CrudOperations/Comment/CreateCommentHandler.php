@@ -9,7 +9,7 @@ use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
 use Foodlove\AppBundle\Repository\CommentRepository;
 use Foodlove\AppBundle\Service\CrudOperations\CreateHandler;
 use Foodlove\AppBundle\Service\EventsHandler\Event\CommentHasBeenAdded;
-use Foodlove\AppBundle\Service\EventsHandler\EventDispatcher;
+use Foodlove\AppBundle\Service\EventsHandler\SystemWideEventDispatcher;
 
 class CreateCommentHandler implements CreateHandler
 {
@@ -24,9 +24,9 @@ class CreateCommentHandler implements CreateHandler
     private $commentRepository;
 
     /**
-     * @var EventDispatcher
+     * @var SystemWideEventDispatcher
      */
-    private $eventDispatcher;
+    private $systemWideEventDispatcher;
 
     /**
      * @var EntityToDtoMapper
@@ -36,12 +36,12 @@ class CreateCommentHandler implements CreateHandler
     public function __construct(
         DtoToEntityMapper $dtoToEntityMapper,
         CommentRepository $commentRepository,
-        EventDispatcher $eventDispatcher,
+        SystemWideEventDispatcher $systemWideEventDispatcher,
         EntityToDtoMapper $entityToDtoMapper
     ) {
         $this->dtoToEntityMapper = $dtoToEntityMapper;
         $this->commentRepository = $commentRepository;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->systemWideEventDispatcher = $systemWideEventDispatcher;
         $this->entityToDtoMapper = $entityToDtoMapper;
     }
 
@@ -50,9 +50,8 @@ class CreateCommentHandler implements CreateHandler
         /** @var Comment $comment */
         $comment = $this->dtoToEntityMapper->transform($commentDto);
         $this->commentRepository->add($comment);
-        $this->eventDispatcher->dispatch(new CommentHasBeenAdded(
+        $this->systemWideEventDispatcher->dispatch(new CommentHasBeenAdded(
             $comment->getAuthorsUsername(),
-            $comment->getAuthorsAvatarFilename(),
             $comment->getPostId()
         ));
 

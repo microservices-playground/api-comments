@@ -2,7 +2,7 @@
 
 namespace Foodlove\AppBundle\Service\EventsHandler;
 
-interface EventDispatcher
+interface SystemWideEventDispatcher
 {
     public function dispatch(Event $event);
 }

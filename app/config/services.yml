@@ -138,6 +138,6 @@ services:
       - "@comments.repository.mention"
 
   comments.event_dispatcher.rabbit_mq:
-    class: Foodlove\AppBundle\Service\EventsHandler\EventDispatcher\RabbitMqEventDispatcher
+    class: Foodlove\AppBundle\Service\EventsHandler\EventDispatcher\RabbitMqSystemWideEventDispatcher
     arguments:
       - "@old_sound_rabbit_mq.activities_producer"
