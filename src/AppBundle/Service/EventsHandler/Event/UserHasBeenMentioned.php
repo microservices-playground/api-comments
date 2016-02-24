@@ -32,7 +32,7 @@ class UserHasBeenMentioned implements Event
     {
         return json_encode([
             'timestamp'        => (new \DateTime())->getTimestamp(),
-            'event'            => Event::COMMENT_HAS_BEEN_ADDED,
+            'event'            => Event::USER_HAS_BEEN_MENTIONED,
             'author'           => $this->author,
             'mentioned_person' => $this->mentionedPerson,
             'post_id'          => $this->postId

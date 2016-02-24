@@ -4,11 +4,13 @@ namespace Foodlove\AppBundle\Service\CrudOperations\Comment;
 
 use Foodlove\AppBundle\Dto\Dto;
 use Foodlove\AppBundle\Entity\Comment;
+use Foodlove\AppBundle\Entity\Mention;
 use Foodlove\AppBundle\Mapper\DtoToEntityMapper;
 use Foodlove\AppBundle\Mapper\EntityToDtoMapper;
 use Foodlove\AppBundle\Repository\CommentRepository;
 use Foodlove\AppBundle\Service\CrudOperations\CreateHandler;
 use Foodlove\AppBundle\Service\EventsHandler\Event\CommentHasBeenAdded;
+use Foodlove\AppBundle\Service\EventsHandler\Event\UserHasBeenMentioned;
 use Foodlove\AppBundle\Service\EventsHandler\SystemWideEventDispatcher;
 
 class CreateCommentHandler implements CreateHandler
@@ -50,10 +52,19 @@ class CreateCommentHandler implements CreateHandler
         /** @var Comment $comment */
         $comment = $this->dtoToEntityMapper->transform($commentDto);
         $this->commentRepository->add($comment);
+
         $this->systemWideEventDispatcher->dispatch(new CommentHasBeenAdded(
             $comment->getAuthorsUsername(),
             $comment->getPostId()
         ));
+
+        foreach ($comment->getMentions() as $mention) {
+            $this->systemWideEventDispatcher->dispatch(new UserHasBeenMentioned(
+                $comment->getAuthorsUsername(),
+                $mention->getUsername(),
+                $comment->getPostId()
+            ));
+        }
 
         return $this->entityToDtoMapper->transform($comment);
     }
