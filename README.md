@@ -12,6 +12,7 @@
     * doctrine2
     * yaml configuration (no annotations)
     * dto + mappers
+- rest + cors
 - mysql
 - rabbitmq
 - phpunit + mockery
