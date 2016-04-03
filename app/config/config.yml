@@ -68,7 +68,7 @@ doctrine:
                         type:      yml
                         prefix:    Foodlove\AppBundle\Entity
                         alias:     AppBundle
-                        dir:       %kernel.root_dir%/config/doctrine/default
+                        dir:       "%kernel.root_dir%/config/doctrine/default"
                         is_bundle: false
             legacy:
                 connection: legacy
@@ -79,13 +79,13 @@ doctrine:
                         type:      yml
                         prefix:    Foodlove\LegacyBundle\Entity
                         alias:     LegacyBundle
-                        dir:       %kernel.root_dir%/config/doctrine/legacy
+                        dir:       "%kernel.root_dir%/config/doctrine/legacy"
                         is_bundle: false
 
 nelmio_cors:
     defaults:
         allow_origin: ["*"]
-        allow_headers: ["Content-Type"]
+        allow_headers: ["Content-Type", "X-Foodlove-User-Id"]
         max_age: 0
     paths:
         '^/posts/[0-9]+/comments/[0-9]+':
