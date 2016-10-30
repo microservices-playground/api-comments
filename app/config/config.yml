@@ -96,10 +96,10 @@ nelmio_cors:
 old_sound_rabbit_mq:
     connections:
         default:
-            host:     "localhost"
+            host:     192.168.100.50
             port:     5672
-            user:     "guest"
-            password: "guest"
+            user:     "admin"
+            password: "admin"
             vhost:    "/"
             lazy:     false
             connection_timeout: 2
