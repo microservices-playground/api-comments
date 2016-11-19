@@ -27,3 +27,9 @@ db-schema:
 
 db-data-copy:
 	bin/console legacy:data:copy-from-legacy-db
+
+composer.phar:
+	curl -Ss https://getcomposer.org/installer | php
+
+install: composer.phar
+	php composer.phar install
