@@ -3,6 +3,10 @@ language: php
 php:
   - 7.0
 
+before_install:
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
+
+
 install:
   - composer self-update
   - composer install
