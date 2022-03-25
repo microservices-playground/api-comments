@@ -17,3 +17,4 @@
 - rabbitmq
 - phpunit + mockery
 - travis + codeclimate
+- test
